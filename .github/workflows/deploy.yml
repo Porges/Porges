@@ -9,18 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Yarn Install
-      uses: borales/actions-yarn@v2.0.0
+
+    - uses: actions/setup-node@v2
       with:
-        cmd: install --frozen-lockfile
-    - name: Yarn Build
-      uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: build
+        node-version: '14'
+        cache: 'npm'
+
+    - run: npm install
+
+    - run: npm run build
       env:
         CI: true
-    - name: GH Pages publish
-      uses: maxheld83/ghpages@v0.2.1
+
+    - uses: maxheld83/ghpages@v0.3.0
       env:
-        BUILD_DIR: 'public/'
+        BUILD_DIR: dist/
         GH_PAT: ${{ secrets.GH_PAT }}
