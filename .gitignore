@@ -1,6 +1,5 @@
 # build output
-dist/*
-!dist/.nojekyll
+dist
 
 # dependencies
 node_modules/
