@@ -21,6 +21,8 @@ jobs:
       env:
         CI: true
 
+    - run: touch dist/.nojekyll
+
     - uses: maxheld83/ghpages@v0.3.0
       env:
         BUILD_DIR: dist/
