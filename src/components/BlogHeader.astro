@@ -1,8 +1,11 @@
+---
+import pic from './profile-pic.png';
+---
 <header class="layout">
   <article>
     <h1>
       <a href="/">
-        <img src="/profile-pic.png" class="profile-pic" />
+        <img src={pic.src} srcset={pic.srcset} width={pic.width} height={pic.height} class="profile-pic" />
         <span>porg.es</span>
       </a>
     </h1>
