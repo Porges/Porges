@@ -2,6 +2,7 @@
 title: Johannes
 publishDate: "2000-01-01"
 description: "somewhere between Wellington & Auckland"
+draft: true
 layout: '../layouts/BlogPost.astro'
 ---
 
