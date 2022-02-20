@@ -264,6 +264,10 @@ pre {
   align-items: center;
 }
 
+p > img {
+  max-width: 100%;
+}
+
 img.cover {
   width: 100%;
   max-height: 50vh;
