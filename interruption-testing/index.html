@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>Interruption Testing</title>
+<meta name="title" content="Interruption Testing">
+<meta name="description" content="">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url">
+<meta property="og:title" content="Interruption Testing">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://astro.build/social.jpg?v=1">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url">
+<meta property="twitter:title" content="Interruption Testing">
+<meta property="twitter:description" content="">
+<meta property="twitter:image" content="https://astro.build/social.jpg?v=1">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+<!-- Pick stylesheet for Prism -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-tomorrow.css">
+
+    <link rel="stylesheet" href="/blog.css">
+  <link rel="stylesheet" href="/assets/asset.60ad93cb.css"></link>
+</head>
+
+  <body>
+    <header class="layout astro-JPOLWZL3">
+  <article class="astro-JPOLWZL3">
+    <h1 class="astro-JPOLWZL3">
+      <a href="/" class="astro-JPOLWZL3">
+        <img src="/assets/asset.ccb2a2da.png" class="profile-pic astro-JPOLWZL3" alt="a photo of me">
+        <span class="astro-JPOLWZL3">porg.es</span>
+      </a>
+    </h1>
+  </article>
+</header>
+
+
+
+    <div class="layout astro-PP3VDX5K">
+  <article class="content astro-PP3VDX5K">
+  <div class="astro-PP3VDX5K">
+    <header class="astro-PP3VDX5K">
+      
+      <p class="publish-date astro-PP3VDX5K">2022-02-20</p>
+      <h1 class="title astro-PP3VDX5K">Interruption Testing</h1>
+      
+<div class="author astro-BL6UQIAR">
+  <p class="astro-BL6UQIAR"><a href="https://twitter.com/porges" class="astro-BL6UQIAR">@porges</a></p>
+</div>
+
+    </header>
+    <main class="astro-PP3VDX5K">
+      <p>This post is an attempt to capture a general description of a simple testing technique I have encountered in a few guises — and “Interruption testing” is my attempt to give it a name.</p><p>Interruption testing is useful when:</p><ol>
+<li>You have a (deterministic) procedure that is comprised of a series of steps.
+(A prerequsite is that you have a way to inject code to interrupt the procedure at any point, and a way to isolate the component being tested so that you can run it repeatedly.)</li>
+<li>You want to ensure that, no matter where in the sequence of steps that the procedure is interrupted, you can successfully “recover” (with exact meaning dependent on the scenario) from the interruption.</li>
+</ol><p>The TL;DR general testing procedure is:</p><ol>
+<li>To create some kind of counter that records the number of “steps” taken.</li>
+<li>To run through the entire operation and see how many steps it takes to successfully complete, call this <code>N</code>.</li>
+<li>Then to exhaustively run through all <code>M</code> from <code>1..N</code>, running the process from start to finish but interrupting the process at step <code>M</code>, and ensuring that the process can then recover and complete successfully.</li>
+</ol><p>(Alternately, you can do without the initial run and interrupt at 1, 2, … until it succeeds.)</p><p>This is a simple technique but I haven’t seen it discussed much anywhere. The first place that I encountered it (I believe) was in <a href="https://twitter.com/DaveAbrahams">Dave Abraham</a>’s article about exception safety in C++, “<a href="https://www.boost.org/community/exception_safety.html">Lessons Learned from Specifying Exception-Safety for the C++ Standard Library</a>”, where he attributes the technique to Matthew Arnold.</p><p><em><strong>Later update</strong>: <a href="https://twitter.com/grhmc">Graham Christensen</a> reminded me that this technique is used by SQLite, who categorize it as “anomaly testing” on their <a href="https://www.sqlite.org/testing.html#anomaly_testing">testing page</a>. They have good descriptions of how it is used to  make code robust against <abbr titl="out-of-memory">OOM</abbr> conditions and I/O errors, and to ensure recoverability after crashes.</em></p><h2 id="example-1-testing-for-exception-safety-in-containers">Example 1: Testing for exception-safety in containers</h2><p>For context, and those who are not C++ programmers, C++ has a concept named “exception safety” that is used to describe the behavior of a component (class, method, function) when an exception is thrown during processing.</p><p>The guarantee comes in several variants:</p><ul>
+<li>the <strong>basic</strong> guarantee is that all invariants of the component are maintained (and memory is not corrupted, etc),</li>
+<li>the <strong>strong</strong> guarantee is that either the operation completes fully or (if an exception is thrown) it does not complete at all, and the state of the component is exactly the same as it was before the operation began — i.e. that the operation is <em>atomic</em>.</li>
+</ul><p>Most C++ containers in the standard library provide the <strong>strong</strong> exception guarantee. But how do we test this?</p><p>One method is as follows:</p><p>Firstly, we create a type that we can use to track the number of “steps” performed. In the case of C++ containers, each step is going to be an invocation of the type’s copy constructor or copy assignment operator.</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">#include</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&lt;memory&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">#include</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&lt;iostream&gt;</span></span>
+<span class="line"><span style="color: #FF7B72">#include</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&lt;vector&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">// a well-known error type to throw</span></span>
+<span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">explode</span><span style="color: #C9D1D9">: </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::</span><span style="color: #FFA657">runtime_error</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #FF7B72">public:</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #D2A8FF">explode</span><span style="color: #C9D1D9">(): std::</span><span style="color: #D2A8FF">runtime_error</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;exploded&quot;</span><span style="color: #C9D1D9">) {}</span></span>
+<span class="line"><span style="color: #C9D1D9">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">// interruptor explodes after being copied explode_at times</span></span>
+<span class="line"><span style="color: #8B949E">// (or doesn’t, if explode_at is 0)</span></span>
+<span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">interruptor</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::shared_ptr</span><span style="color: #FF7B72">&lt;int&gt;</span><span style="color: #C9D1D9"> counter_;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> explode_at_;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">copied</span><span style="color: #C9D1D9">() {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (</span><span style="color: #FF7B72">++*</span><span style="color: #C9D1D9">counter_ </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> explode_at_) {</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">throw</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">explode</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">public:</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #D2A8FF">interruptor</span><span style="color: #C9D1D9">(</span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::</span><span style="color: #FFA657">shared_ptr</span><span style="color: #C9D1D9">&lt;</span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9">&gt; </span><span style="color: #FFA657">x</span><span style="color: #C9D1D9">, </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">explode_at</span><span style="color: #FF7B72">=</span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        : </span><span style="color: #D2A8FF">counter_</span><span style="color: #C9D1D9">{</span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::</span><span style="color: #D2A8FF">move</span><span style="color: #C9D1D9">(x)}</span></span>
+<span class="line"><span style="color: #C9D1D9">        , </span><span style="color: #D2A8FF">explode_at_</span><span style="color: #C9D1D9">{explode_at} {}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #D2A8FF">interruptor</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">interruptor</span><span style="color: #FF7B72">&amp;</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">other</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        : </span><span style="color: #D2A8FF">counter_</span><span style="color: #C9D1D9">{other.counter_}</span></span>
+<span class="line"><span style="color: #C9D1D9">        , </span><span style="color: #D2A8FF">explode_at_</span><span style="color: #C9D1D9">{other.explode_at_}</span></span>
+<span class="line"><span style="color: #C9D1D9">        { </span><span style="color: #D2A8FF">copied</span><span style="color: #C9D1D9">(); }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FFA657">interruptor</span><span style="color: #FF7B72">&amp;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">operator</span><span style="color: #FFA657">=</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">interruptor</span><span style="color: #FF7B72">&amp;</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">other</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">        counter_ </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> other.counter_;</span></span>
+<span class="line"><span style="color: #C9D1D9">        explode_at_ </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> other.explode_at_;</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #D2A8FF">copied</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">*</span><span style="color: #79C0FF">this</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">};</span></span></code></pre><p>Next we write our test operation. In this case, let’s assume we want to ensure that the <code>std::vector</code> function <code>insert(position, value, number)</code> either inserts <code>number</code> copies of <code>value</code>, or doesn’t insert anything at all (the <strong>strong</strong> exception guarantee).</p><p>We can configure our test function to interrupt after any number of steps via the <code>explode_at</code> parameter:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">insert_is_atomic</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">explode_at</span><span style="color: #FF7B72">=</span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">auto</span><span style="color: #C9D1D9"> copies </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">100</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">auto</span><span style="color: #C9D1D9"> exploded </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">false</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">auto</span><span style="color: #C9D1D9"> counter </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::</span><span style="color: #D2A8FF">make_shared</span><span style="color: #C9D1D9">&lt;</span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9">&gt;(</span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">    interruptor value{counter, explode_at};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::vector</span><span style="color: #FF7B72">&lt;</span><span style="color: #C9D1D9">interruptor</span><span style="color: #FF7B72">&gt;</span><span style="color: #C9D1D9"> vector;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">try</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">        vector.</span><span style="color: #D2A8FF">insert</span><span style="color: #C9D1D9">(vector.</span><span style="color: #D2A8FF">end</span><span style="color: #C9D1D9">(), copies, value);</span></span>
+<span class="line"><span style="color: #C9D1D9">    } </span><span style="color: #FF7B72">catch</span><span style="color: #C9D1D9"> (explode</span><span style="color: #FF7B72">&amp;</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">        exploded </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">    } </span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">    // assert atomic condition - either all were inserted or none</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (exploded) {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (vector.</span><span style="color: #D2A8FF">size</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">!=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">throw</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::</span><span style="color: #D2A8FF">runtime_error</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;insert was not atomic&quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #C9D1D9">    } </span><span style="color: #FF7B72">else</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (vector.</span><span style="color: #D2A8FF">size</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">!=</span><span style="color: #C9D1D9"> copies) {</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">throw</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::</span><span style="color: #D2A8FF">runtime_error</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;insert did not insert all copies&quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">    // safety check to ensure that everything worked properly</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (explode_at </span><span style="color: #FF7B72">!=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">&amp;&amp;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">!</span><span style="color: #C9D1D9">exploded) {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">throw</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::</span><span style="color: #D2A8FF">runtime_error</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;explode was not triggered&quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">*</span><span style="color: #C9D1D9">counter;</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>Finally, we can execute our test exhaustively as follows:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">main</span><span style="color: #C9D1D9">() {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">auto</span><span style="color: #C9D1D9"> steps_count </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">insert_is_atomic</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::cout </span><span style="color: #FF7B72">&lt;&lt;</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;Total steps needed: &quot;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">&lt;&lt;</span><span style="color: #C9D1D9"> steps_count </span><span style="color: #FF7B72">&lt;&lt;</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::endl;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9"> (</span><span style="color: #FF7B72">auto</span><span style="color: #C9D1D9"> i </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">; i </span><span style="color: #FF7B72">&lt;=</span><span style="color: #C9D1D9"> steps_count; </span><span style="color: #FF7B72">++</span><span style="color: #C9D1D9">i) {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::cout </span><span style="color: #FF7B72">&lt;&lt;</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;Interrupting after: &quot;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">&lt;&lt;</span><span style="color: #C9D1D9"> i </span><span style="color: #FF7B72">&lt;&lt;</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::endl;</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #D2A8FF">insert_is_atomic</span><span style="color: #C9D1D9">(i);</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::cout </span><span style="color: #FF7B72">&lt;&lt;</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;Test was successful&quot;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">&lt;&lt;</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">std</span><span style="color: #C9D1D9">::endl;</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>First we run through and record how many steps (<code>steps_count</code>) it requires to fully complete succesfully, then we run the operation again once for each step count from 1 through to <code>steps_count</code>, and ensure that the condition we are testing (that <code>insert</code> is atomic) holds each time.</p><p>We can also use this to check weaker forms of exception-safety, but often we would need access to the internals of the classes in question to assert basic features such as “all invariants hold”.</p><p>The same technique could be used in (for example) Rust, to ensure that containers are “panic-safe” when a type is cloned a certain number of times.</p><h2 id="example-2-testing-for-recoverability-of-message-processing-services">Example 2: Testing for recoverability of message processing services</h2><p>This is another place that I have used the technique. In this case we have a service that processes messages from a queue and produces some form of output.</p><p><img src="/int_image1.png" alt=""></p><p>The core processing loop of the service, at a broad level, performs the following sequence of operations:</p><ol>
+<li>first it reads messages from a queue, and does some internal processing (internally, not affecting the outside world),</li>
+<li>potentially produces one or more output messages (these can be HTTP calls or messages to another queue, etc),</li>
+<li>might update some persistent state (we ignore any reads of this state as they have no external effect),</li>
+<li>consumes/deletes the input messages to indicate that they have been processed.</li>
+</ol><p>For the purposes of testing, I usually assume that the generated messages form a <em>set</em> instead of a queue. This means that we trust that any downstream services are idempotent and will not perform duplicate operations for duplicated messages. (This is something we can actually easily test for this service as well!)</p><p><img src="/int_image2.png" alt=""></p><p>Now, at each step 1–4, the service makes contact with the outside world in some visible way. We would like to test that the service can be interrupted at any of these points (due to network failure, program crash, etc), and that after it recovers from the interruption it eventually produce the same overall set of output messages and identical internal state. If we can show this, then the service is interruptible at any point in its operation.</p><p>In order to test this, we must first ensure that we can fully isolate the service so that each of: the input queue, the output queue, and the persistent storage are all replaced with in-memory fake versions. This could be as simple as using a queue type in whatever language you are using, and an ordinary mutable variable for the persistent state.</p><p>Next, we interpose a counting layer between each of these “I/O points” where the service interacts with the outside world. This functions similarly to the C++ code above, in that it records the number of steps (interactions) taken, and can be configured to explode/abort when a certain number of steps is reached. At the code level this will usually take the form of a couple of façade types which wrap an inner implementation for the queues and storage, but additionally performs the counting/exploding steps.</p><p><img src="/int_image3.png" alt=""></p><p>Finally, we proceed with the test:</p><ol>
+<li>
+<p>We generate some set of input messages (whether randomly or as part of a property-based test, or artisanally hand-coded),</p>
+</li>
+<li>
+<p>Run the service over the full set of messages, recording:</p>
+<ol>
+<li>
+<p>the set of output messages,</p>
+</li>
+<li>
+<p>the final state of the persistent storage, and</p>
+</li>
+<li>
+<p>the number of steps (<code>N</code>) required to fully process all messages  successfully.</p>
+</li>
+</ol>
+<p>Both 1. and 2. are required for the correctness assertion (see below).</p>
+</li>
+<li>
+<p>Then, we run through the numbers from <code>1..N</code>, and perform the interruption/resume and assert steps.</p>
+</li>
+</ol><p>In this case the interruption step would be to produce an exception (or otherwise immediately halt processing) when the number of external interactions hits the target number, then resume the service again from the exact same point, that is, with the remaining set of undeleted input messages, and with the persistent storage in the same state as it was when the service was halted.</p><p>The correctness assertion to be performed after each interrupt/resume test is that:</p><ol>
+<li>the set of output messages is identical (remember that interrupting the service after step 2 but before step 3 means that duplicate messages must be possible), and</li>
+<li>that the final version of the persistent storage is identical to that produced by the service during the initial uninterrupted run. This guarantees that any following operations would perform in the same way from this point onward.</li>
+</ol><h2 id="summary">Summary</h2><p>I think this technique is broadly useful and is probably applicable in other scenarios as well. I’d be interested to hear if other people have found other ways to apply it!</p>
+    </main>
+  </div>
+  </article>
+</div>
+
+
+
+  </body></html>

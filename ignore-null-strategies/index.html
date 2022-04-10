@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>Ignore Null Strategies</title>
+<meta name="title" content="Ignore Null Strategies">
+<meta name="description" content="There’s no such thing as a null strategy!">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url">
+<meta property="og:title" content="Ignore Null Strategies">
+<meta property="og:description" content="There’s no such thing as a null strategy!">
+<meta property="og:image" content="https://astro.build/social.jpg?v=1">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url">
+<meta property="twitter:title" content="Ignore Null Strategies">
+<meta property="twitter:description" content="There’s no such thing as a null strategy!">
+<meta property="twitter:image" content="https://astro.build/social.jpg?v=1">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+<!-- Pick stylesheet for Prism -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-tomorrow.css">
+
+    <link rel="stylesheet" href="/blog.css">
+  <link rel="stylesheet" href="/assets/asset.60ad93cb.css"></link>
+</head>
+
+  <body>
+    <header class="layout astro-JPOLWZL3">
+  <article class="astro-JPOLWZL3">
+    <h1 class="astro-JPOLWZL3">
+      <a href="/" class="astro-JPOLWZL3">
+        <img src="/assets/asset.ccb2a2da.png" class="profile-pic astro-JPOLWZL3" alt="a photo of me">
+        <span class="astro-JPOLWZL3">porg.es</span>
+      </a>
+    </h1>
+  </article>
+</header>
+
+
+
+    <div class="layout astro-PP3VDX5K">
+  <article class="content astro-PP3VDX5K">
+  <div class="astro-PP3VDX5K">
+    <header class="astro-PP3VDX5K">
+      
+      <p class="publish-date astro-PP3VDX5K">2000-01-02</p>
+      <h1 class="title astro-PP3VDX5K">Ignore Null Strategies</h1>
+      
+<div class="author astro-BL6UQIAR">
+  <p class="astro-BL6UQIAR"><a href="https://twitter.com/porges" class="astro-BL6UQIAR">@porges</a></p>
+</div>
+
+    </header>
+    <main class="astro-PP3VDX5K">
+      <blockquote>
+<p>There’s no such thing as a null strategy!</p>
+</blockquote><p>Here is a simple refactoring/micro-pattern that can help remove a little complexity from classes that use passed-in behaviours/strategies/handlers/whatever you want to call them. <sup><a href="#user-content-fn-n" id="user-content-fnref-n" data-footnote-ref aria-describedby="footnote-label">1</a></sup>
+The examples given here may seem rather abstract or “enterprisey”, but it’s something that comes up repeatedly when developing software.</p><h3 id="the-problem-checking-strategies-for-nullness">The problem: Checking strategies for nullness</h3><p>Below is a very simplified example of a consumer (the class <code>ProducerExample</code>) of the <code>IProducer</code> strategy. The consumer explicitly checks if the strategy is null before invoking it, and if it <em>is</em> null, it produces some default value instead.</p><p>This extra null check gets in the way of what the class is actually doing and introduces an extra code path that is not wanted (or needed).</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">interface</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">IProducer</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Produce</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">ProducerExample</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">readonly</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">IProducer</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">_producer</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// constructor elided...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Act</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (_producer </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">null</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        {</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> Result.Default;</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> _producer.</span><span style="color: #D2A8FF">Produce</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>(The producer here is deliberately simple—in a real codebase this could take any number of arguments.)</p><p>One situation where this kind of code might appear is when a previously-untested class is being tested for the first time. In this case, dummy values might be inserted in order that <code>null</code> can be passed as the strategy at test time and you’ll still get results instead of a <code>NullReferenceException</code>. This kind of setup is dangerous, as inadvertently passing <code>null</code> in the production code will end up generating these dummy values! 💥</p><p>Here’s a very similar example, using a strategy that doesn’t have a result (which I’ll call a “handler”). This is checked for nullness before it is invoked for its side-effects:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">interface</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">IHandler</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Handle</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">HandlerExample</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">readonly</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">IHandler</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">_handler</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// constructor elided...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Run</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (_handler </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">null</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        {</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #8B949E">// some other implementation</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">else</span></span>
+<span class="line"><span style="color: #C9D1D9">        {</span></span>
+<span class="line"><span style="color: #C9D1D9">            _handler.</span><span style="color: #D2A8FF">Handle</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><h3 id="solution-dont-check-strategies-for-nullness">Solution: Don’t check strategies for nullness!</h3><p>Instead of explicitly checking for nullness, assume that the strategy is not null (you can enforce this in the constructor) and migrate any “default action” into a new implementation of the strategy.</p><p>Then, anywhere you were previously passing in <code>null</code>, you can instead pass an instance of your shiny new implementation.</p><p>For the producer example, we can move the default implementation into a new class, and remove the null check:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">DefaultProducer</span><span style="color: #C9D1D9"> : </span><span style="color: #FFA657">IProducer</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Produce</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> Result.Default;</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">ProducerExampleRevised</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    [</span><span style="color: #FFA657">NotNull</span><span style="color: #C9D1D9">] </span><span style="color: #FF7B72">readonly</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">IProducer</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">_strategy</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// constructor elided...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Run</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> _strategy.</span><span style="color: #D2A8FF">Produce</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>(The <code>[NotNull]</code> annotation here is something supported by Resharper via the <a href="https://www.nuget.org/packages/JetBrains.Annotations">Resharper.Annotations</a> package.)</p><p>If we need to change the result of the producer depending on what the consumer is, we can use a variation on this, and create an implementation that stores any value we want:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">ConstantProducer</span><span style="color: #C9D1D9"> : </span><span style="color: #FFA657">IProducer</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Value</span><span style="color: #C9D1D9"> { </span><span style="color: #FF7B72">get</span><span style="color: #C9D1D9">; }</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">ConstantProducer</span><span style="color: #C9D1D9">(</span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">value</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">        Value </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> value;</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Produce</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> Value;</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>In the “handler” case, we can create a <a href="https://en.wikipedia.org/wiki/Null_Object_pattern">‘null object’ implementation</a> that does nothing, since we don’t need to produce a result:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">NullHandler</span><span style="color: #C9D1D9"> : </span><span style="color: #FFA657">IHandler</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Handle</span><span style="color: #C9D1D9">() { }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">HandlerExampleRevised</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    [</span><span style="color: #FFA657">NotNull</span><span style="color: #C9D1D9">] </span><span style="color: #FF7B72">readonly</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">IHandler</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">_handler</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// constructor elided...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Run</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">        _handler.</span><span style="color: #D2A8FF">Handle</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>With the refactored code, the consuming classes are cleaner (less code, lower cyclomatic complexity), and we have extracted a “default” implementation, which could potentially be used by other consumers.</p><p>At the same time, we have created some useful additional implementations that we can use in unit tests! The “Default” or “Constant” producers are useful when providing canned data to classes that are being tested, and “Null” handlers are useful when ignoring part of the behaviour of a class in order to test other parts.</p><hr><h4 id="variation-function-oriented-implementation">Variation: Function-oriented implementation</h4><p>For single-method interfaces such as those above we can replace them with delegates. This can lead to much cleaner code.</p><p>For producers:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">delegate</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Producer</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Producers</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// Default is a Producer</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Default</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> Result.Default;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// Constant returns a Producer, given an argument</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Producer</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Constant</span><span style="color: #C9D1D9">(</span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">r</span><span style="color: #C9D1D9">) </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> () </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> r;</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">FunctionalProducerExample</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    [</span><span style="color: #FFA657">NotNull</span><span style="color: #C9D1D9">] </span><span style="color: #FF7B72">readonly</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Producer</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">_strategy</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// constructor elided...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Result</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Run</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">_strategy</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>And for handlers:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">delegate</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Handler</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Handlers</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// Null is a Handler</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Null</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">FunctionalHandlerExample</span></span>
+<span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    [</span><span style="color: #FFA657">NotNull</span><span style="color: #C9D1D9">] </span><span style="color: #FF7B72">readonly</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Handler</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">_handler</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// constructor elided...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Run</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">    {</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #D2A8FF">_handler</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>I have yet to explore this style in-depth myself, but it seems promising. (I would avoid using pure <code>Func&#x3C;T, ...></code> as it doesn’t give any indication of what the intention of the code is.)</p><p>The nice thing about delegates is that they will implicitly convert any compatible lambda; so if you need a one-off implementation in test code, you can write it directly in your test method, and not have to create an entirely new class.</p><section data-footnotes class="footnotes"><h2 id="footnote-label" class="sr-only">Footnotes</h2>
+<ol>
+<li id="user-content-fn-n">
+<p>Here I’m going to use strategy in a broad sense, to basically include any behaviour that is injected into a class. Other people might call these collaborators (although I’d apply that to the implementations of the strategy and not the strategy abstraction itself), or something different. <a href="#user-content-fnref-n" data-footnote-backref class="data-footnote-backref" aria-label="Back to content">↩</a></p>
+</li>
+</ol>
+</section>
+    </main>
+  </div>
+  </article>
+</div>
+
+
+
+  </body></html>

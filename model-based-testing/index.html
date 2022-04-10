@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>(Poor man’s) model-based testing with F# &amp; FsCheck</title>
+<meta name="title" content="(Poor man’s) model-based testing with F# &#38; FsCheck">
+<meta name="description">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url">
+<meta property="og:title" content="(Poor man’s) model-based testing with F# &#38; FsCheck">
+<meta property="og:description">
+<meta property="og:image" content="https://astro.build/social.jpg?v=1">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url">
+<meta property="twitter:title" content="(Poor man’s) model-based testing with F# &#38; FsCheck">
+<meta property="twitter:description">
+<meta property="twitter:image" content="https://astro.build/social.jpg?v=1">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+<!-- Pick stylesheet for Prism -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-tomorrow.css">
+
+    <link rel="stylesheet" href="/blog.css">
+  <link rel="stylesheet" href="/assets/asset.60ad93cb.css"></link>
+</head>
+
+  <body>
+    <header class="layout astro-JPOLWZL3">
+  <article class="astro-JPOLWZL3">
+    <h1 class="astro-JPOLWZL3">
+      <a href="/" class="astro-JPOLWZL3">
+        <img src="/assets/asset.ccb2a2da.png" class="profile-pic astro-JPOLWZL3" alt="a photo of me">
+        <span class="astro-JPOLWZL3">porg.es</span>
+      </a>
+    </h1>
+  </article>
+</header>
+
+
+
+    <div class="layout astro-PP3VDX5K">
+  <article class="content astro-PP3VDX5K">
+  <div class="astro-PP3VDX5K">
+    <header class="astro-PP3VDX5K">
+      
+      <p class="publish-date astro-PP3VDX5K">2017-02-01</p>
+      <h1 class="title astro-PP3VDX5K">(Poor man’s) model-based testing with F# &amp; FsCheck</h1>
+      
+<div class="author astro-BL6UQIAR">
+  <p class="astro-BL6UQIAR"><a href="https://twitter.com/porges" class="astro-BL6UQIAR">@porges</a></p>
+</div>
+
+    </header>
+    <main class="astro-PP3VDX5K">
+      <p><em>This is a blog version of a talk that I did ~2015 in Auckland. Nothing in it is original or unknown, but there aren’t that many examples of doing this aside from <a href="https://fscheck.github.io/FsCheck/StatefulTesting.html">in the FsCheck documentation</a>. I also gave <a href="https://www.youtube.com/watch?v=8oALNLdyOyM">a talk which contains a very similar example</a> to the Melbourne ALT.NET meetup in 2018.</em></p><h3 id="what-is-fscheck">What is FsCheck?</h3><p>FsCheck is a library in the spirit of Haskell’s <a href="https://en.wikipedia.org/wiki/QuickCheck">QuickCheck</a>, which allows you to perform property-based testing. The main feature that it provides is the ability to generate arbitrary instances of any supported data type, and the ability to define your own generators.</p><p>We can leverage this ability to perform model-based testing in a simple manner.</p><p>Let’s run through how we can use this to test a simple system. All the code in this post is going to be F#, but the system could equally well be described in C# and tested from F#. If you copy and paste the code into an F# file, it should work (you’ll need to install the <code>FsCheck.Xunit</code> and <code>xunit</code> packages, and probably <code>xunit.runner.visualstudio</code> to run the tests).</p><h3 id="the-system-to-test">The system to test</h3><p>In our basic system, we store users. We can <code>Add</code>, <code>Get</code> (possibly failing), or <code>Delete</code> a user. This is described by the following interface:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #79C0FF">[&lt;Struct&gt;]</span></span>
+<span class="line"><span style="color: #FF7B72">type</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">UserId</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> UserId </span><span style="color: #FF7B72">of</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">string</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">type</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">User</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">{</span><span style="color: #C9D1D9"> id </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">UserId </span><span style="color: #FF7B72">;</span><span style="color: #C9D1D9"> name </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">string </span><span style="color: #FF7B72">;</span><span style="color: #C9D1D9"> age </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">int </span><span style="color: #FF7B72">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">type</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">IUserOperations</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">abstract</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> AddUser </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">User</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">unit</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">abstract</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> GetUser </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">UserId</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Option</span><span style="color: #FF7B72">&lt;</span><span style="color: #FFA657">User</span><span style="color: #FF7B72">&gt;</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">abstract</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> DeleteUser </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">UserId</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">unit</span></span></code></pre><p>Next we have to implement this system.</p><p>We’ll use an in-memory dictionary, where we map <code>UserID</code>s to the actual <code>User</code> objects:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">open</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">System.Collections.Generic</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">type</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">UserSystem</span><span style="color: #79C0FF">()</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">let</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">users</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> Dictionary</span><span style="color: #FF7B72">&lt;</span><span style="color: #C9D1D9">UserId</span><span style="color: #FF7B72">,</span><span style="color: #C9D1D9"> User</span><span style="color: #FF7B72">&gt;</span><span style="color: #79C0FF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #8B949E">// Exposed for us to use later:</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">this.UserCount</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> users.Count</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #8B949E">// And implement the interface:</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">interface</span><span style="color: #C9D1D9"> IUserOperations </span><span style="color: #FF7B72">with</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">this.AddUser u </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">        users.</span><span style="color: #FF7B72">[</span><span style="color: #C9D1D9">u.id</span><span style="color: #FF7B72">]</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">&lt;-</span><span style="color: #C9D1D9"> u</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">this.GetUser id </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">match</span><span style="color: #C9D1D9"> users.TryGetValue id </span><span style="color: #FF7B72">with</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">|</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">(</span><span style="color: #79C0FF">true</span><span style="color: #FF7B72">,</span><span style="color: #C9D1D9"> user</span><span style="color: #FF7B72">)</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9"> Some user</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">|</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">_</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9"> None</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">this.DeleteUser </span><span style="color: #FF7B72">(</span><span style="color: #FFA657">UserId id</span><span style="color: #FF7B72">)</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> id.Contains </span><span style="color: #A5D6FF">&quot;*&quot;</span><span style="color: #C9D1D9"> </span><span style="color: #8B949E">// Uh-oh: catastrophic bug!</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">then</span><span style="color: #C9D1D9"> users.Clear</span><span style="color: #79C0FF">()</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">else</span><span style="color: #C9D1D9"> users.Remove </span><span style="color: #FF7B72">(</span><span style="color: #C9D1D9">UserId id</span><span style="color: #FF7B72">)</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">|&gt;</span><span style="color: #C9D1D9"> ignore</span></span></code></pre><p><em>Unfortunately</em>, on line 20 we’ve introduced a critical bug. If the user ID contains “<code>*</code>” then we accidentally remove all the users in the system. Oops. 🤦</p><p>Later on we will see if our test will find this bug.</p><h3 id="modelling-the-system">Modelling the system</h3><p>In order to check our system, we must develop a model—a simplified version of the system that we can verify more easily. The model doesn’t need to replicate every piece of behaviour of the full system, it might only replicate one aspect that we care about.</p><p>Here we will use a version of the system that only cares about <em>how many</em> users there are. In order to track this it only needs to store the set of valid IDs:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E">// this is our model</span></span>
+<span class="line"><span style="color: #8B949E">// the only thing we care about is how many users there are</span></span>
+<span class="line"><span style="color: #8B949E">// so we just store the names as a set</span></span>
+<span class="line"><span style="color: #FF7B72">type</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">UserCountModel</span><span style="color: #79C0FF">()</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">let</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">users</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> HashSet</span><span style="color: #FF7B72">&lt;</span><span style="color: #C9D1D9">UserId</span><span style="color: #FF7B72">&gt;</span><span style="color: #79C0FF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">this.Verify </span><span style="color: #FF7B72">(</span><span style="color: #FFA657">real </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">UserSystem</span><span style="color: #FF7B72">)</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">        Xunit.Assert.Equal</span><span style="color: #FF7B72">(</span><span style="color: #C9D1D9">users.Count</span><span style="color: #FF7B72">,</span><span style="color: #C9D1D9"> real.UserCount</span><span style="color: #FF7B72">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">interface</span><span style="color: #C9D1D9"> IUserOperations </span><span style="color: #FF7B72">with</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">this.AddUser u </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span></span>
+<span class="line"><span style="color: #C9D1D9">            users.Add u.id </span><span style="color: #FF7B72">|&gt;</span><span style="color: #C9D1D9"> ignore</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">this.DeleteUser name </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">            users.Remove name </span><span style="color: #FF7B72">|&gt;</span><span style="color: #C9D1D9"> ignore</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">member</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">this.GetUser name </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> None</span></span></code></pre><p><code>Add</code> adds an ID to the set (unless it already exists), <code>Delete</code> removes an ID (if it exists), and <code>Get</code> does nothing.</p><p>We also provide a <code>Verify</code> method that checks the model against the real system. (In real life, this could use HTTP calls or some other method.)</p><h3 id="applying-operations">Applying operations</h3><p>Now, in order to test our system, we need a way to describe the actions we can perform against it. We do this by <em>reifying</em> the operations we can perform as a data type:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">type</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Operation</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">|</span><span style="color: #C9D1D9"> Add </span><span style="color: #FF7B72">of</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">User</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">|</span><span style="color: #C9D1D9"> Get </span><span style="color: #FF7B72">of</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">UserId</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">|</span><span style="color: #C9D1D9"> Delete </span><span style="color: #FF7B72">of</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">UserId</span></span></code></pre><p>See that that this aligns exactly with the <code>IUserOperations</code> interface shown in the first block of code above. For each method on the interface, we have a corresponding case in the discriminated union, and the data needed to call the method is also contained in the case.</p><p>Next, we need to be able to perform these actions against both the model and the real system. To do this we simply translate from each case to the corresponding method on the interface:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">let</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">applyOp </span><span style="color: #FF7B72">(</span><span style="color: #FFA657">op </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Operation</span><span style="color: #FF7B72">)</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">(</span><span style="color: #FFA657">handler </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">IUserOperations</span><span style="color: #FF7B72">)</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">match</span><span style="color: #C9D1D9"> op </span><span style="color: #FF7B72">with</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">|</span><span style="color: #C9D1D9"> Add user </span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9"> handler.AddUser user</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">|</span><span style="color: #C9D1D9"> Get name </span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9"> handler.GetUser name </span><span style="color: #FF7B72">|&gt;</span><span style="color: #C9D1D9"> ignore</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">|</span><span style="color: #C9D1D9"> Delete name </span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9"> handler.DeleteUser name</span></span></code></pre><h3 id="testing-the-system">Testing the system</h3><p>Now we get to the magic part! First up, we have a little boilerplate to tell FsCheck that we don’t want any <code>null</code> strings generated, as this would just complicate the example:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">open</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">FsCheck</span></span>
+<span class="line"><span style="color: #FF7B72">open</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">FsCheck.Xunit</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">type</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Arbs</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// declare we only want non-null strings</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">static member</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">strings</span><span style="color: #79C0FF">()</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">        Arb.filter </span><span style="color: #FF7B72">(fun</span><span style="color: #FFA657"> s </span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9"> s </span><span style="color: #FF7B72">&lt;&gt;</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">null</span><span style="color: #FF7B72">)</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">&lt;|</span><span style="color: #C9D1D9"> Arb.Default.String</span><span style="color: #79C0FF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #79C0FF">[&lt;Properties</span><span style="color: #FF7B72">(</span><span style="color: #79C0FF">Arbitrary</span><span style="color: #FF7B72">=[|</span><span style="color: #79C0FF">typeof</span><span style="color: #FF7B72">&lt;</span><span style="color: #79C0FF">Arbs</span><span style="color: #FF7B72">&gt;|])</span><span style="color: #79C0FF">&gt;]</span></span>
+<span class="line"><span style="color: #FF7B72">module</span><span style="color: #FFA657"> Tests </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #8B949E">// ... next snippet</span></span></code></pre><p>And now our test. We take in a list of operations (which FsCheck will automatically generate for us), we apply all the operations to both models, and then we verify the system against the model:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">[&lt;Property&gt;]</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">let</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">``Check implementation against model`` operations </span><span style="color: #FF7B72">=</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// create both implementations empty</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">let</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">real</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> UserSystem</span><span style="color: #79C0FF">()</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">let</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">model</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> UserCountModel</span><span style="color: #79C0FF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// apply all the operations</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">let</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">applyToBothModels op </span><span style="color: #FF7B72">=</span></span>
+<span class="line"><span style="color: #C9D1D9">            applyOp op real</span></span>
+<span class="line"><span style="color: #C9D1D9">            applyOp op model</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        List.iter applyToBothModels operations</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #8B949E">// verify the result</span></span>
+<span class="line"><span style="color: #C9D1D9">        model.Verify real</span></span></code></pre><p>This may seem like less code than expected! FsCheck can automatically build us a list of <code>Operation</code>s because it knows how to make <code>Operation</code> (since it knows how to make each case in turn,starting from <code>string</code>s and building up). Recursion is great!</p><h3 id="running-the-test-and-shrinking">Running the test and “shrinking”</h3><p>If you try to run the test, you should receive a result along these lines (the exact details will differ):</p><p><img src="/content/images/2017/02/shrunk.PNG" alt=""></p><p>Our test failed (that’s a good thing!) See the second-to-last <code>Delete</code> operation in the input? It is deleting <code>UserId "^*VJc6'/I^x"</code>, which triggers the bug we have in our system for user IDs containing “<code>*</code>”.</p><p>The input it’s showing us is quite gnarly as FsCheck has generated user IDs containing newlines and other nasty characters, but the highlighted part at the bottom is what FsCheck was able to shrink the failing input to.</p><p>It can do this because, as well as knowing how to <em>generate</em> random data, FsCheck knows how to <em>shrink</em> random data. It was able to repeatedly shrink the input until it found this minimal case, containing only two operations:</p><ol>
+<li>Add a user (note that it doesn’t seem to matter what the details are, as all the attributes shrank away to nothing–if the details mattered, then it wouldn’t have shrunk this much)</li>
+<li>Delete the user with ID “<code>*</code>”</li>
+</ol><p>And indeed, this sequence exactly replicates our bug! 🎉</p><p>The combination of randomly generating inputs and then being able to shrink them when failures are found is <em>very</em> powerful.</p><h3 id="the-recipe">The recipe</h3><p>A simple list for success:</p><ol>
+<li>model your system-under-test as an interface</li>
+<li>create a model of your system (or multiple models, each testing one aspect) that also implements the interface</li>
+<li>create a type that reifies each operation as a member of a discriminated union</li>
+<li>create a test that applies a list of operations to the model and system and validates the system</li>
+<li>💅 relax and let your computer do the work</li>
+</ol>
+    </main>
+  </div>
+  </article>
+</div>
+
+
+
+  </body></html>
