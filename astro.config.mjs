@@ -6,12 +6,11 @@
 // helpful tooltips, and warnings if your exported object is invalid.
 // You can disable this by removing "@ts-check" and `@type` comments below.
 
+import { defineConfig } from 'astro/config';
+import preact from '@astrojs/preact';
+
 // @ts-check
-export default /** @type {import('astro').AstroUserConfig} */ ({
-  // Enable the Preact renderer to support Preact JSX components.
-  renderers: ['@astrojs/renderer-preact'],
-  buildOptions: {
-    site: "https://porg.es/",
-    sitemap: true,
-  }
+export default defineConfig({
+  integrations: [preact()],
+  site: "https://porg.es/",
 });

@@ -5,8 +5,6 @@ export interface Props {
   permalink: string;
 }
 const { title, description, permalink } = Astro.props;
-
-import 'prismjs/themes/prism-tomorrow.css'
 ---
 
 <!-- Global Metadata -->
@@ -36,3 +34,6 @@ import 'prismjs/themes/prism-tomorrow.css'
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+<!-- Pick stylesheet for Prism -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-tomorrow.css"/>

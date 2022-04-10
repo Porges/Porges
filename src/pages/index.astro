@@ -19,9 +19,9 @@ let permalink = 'https://porg.es/';
 
 // Data Fetching: List all Markdown posts in the repo.
 
-let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./*.md');
-allPosts = allPosts.filter(p => !p.draft);
-allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf());
+let allPosts = await Astro.glob<MarkdownFrontmatter>('./*.md');
+allPosts = allPosts.filter(p => !p.frontmatter.draft);
+allPosts = allPosts.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/

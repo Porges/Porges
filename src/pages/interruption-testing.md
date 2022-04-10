@@ -23,7 +23,7 @@ The TL;DR general testing procedure is:
 
 This is a simple technique but I haven’t seen it discussed much anywhere. The first place that I encountered it (I believe) was in [Dave Abraham](https://twitter.com/DaveAbrahams)’s article about exception safety in C++, “[Lessons Learned from Specifying Exception-Safety for the C++ Standard Library](https://www.boost.org/community/exception_safety.html)”, where he attributes the technique to Matthew Arnold.
 
-<i>**Later update**: [Graham Christensen](https://twitter.com/grhmc) reminded me that this technique is used by SQLite, who categorize it as “anomaly testing” on their [testing page](https://www.sqlite.org/testing.html#anomaly_testing). They have good descriptions of how it is used to  make code robust against <abbr titl="out-of-memory">OOM</abbr> conditions and I/O errors, and to ensure recoverability after crashes.</i>
+***Later update**: [Graham Christensen](https://twitter.com/grhmc) reminded me that this technique is used by SQLite, who categorize it as “anomaly testing” on their [testing page](https://www.sqlite.org/testing.html#anomaly_testing). They have good descriptions of how it is used to  make code robust against <abbr titl="out-of-memory">OOM</abbr> conditions and I/O errors, and to ensure recoverability after crashes.*
 
 ## Testing for exception-safety in containers
 
