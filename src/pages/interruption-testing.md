@@ -25,7 +25,7 @@ This is a simple technique but I haven’t seen it discussed much anywhere. The 
 
 ***Later update**: [Graham Christensen](https://twitter.com/grhmc) reminded me that this technique is used by SQLite, who categorize it as “anomaly testing” on their [testing page](https://www.sqlite.org/testing.html#anomaly_testing). They have good descriptions of how it is used to  make code robust against <abbr titl="out-of-memory">OOM</abbr> conditions and I/O errors, and to ensure recoverability after crashes.*
 
-## Testing for exception-safety in containers
+## Example 1: Testing for exception-safety in containers
 
 For context, and those who are not C++ programmers, C++ has a concept named “exception safety” that is used to describe the behavior of a component (class, method, function) when an exception is thrown during processing.
 
@@ -144,7 +144,7 @@ We can also use this to check weaker forms of exception-safety, but often we wou
  
 The same technique could be used in (for example) Rust, to ensure that containers are “panic-safe” when a type is cloned a certain number of times.
 
-## Testing for recoverability of message processing services
+## Example 2: Testing for recoverability of message processing services
 
 This is another place that I have used the technique. In this case we have a service that processes messages from a queue and produces some form of output.
 
