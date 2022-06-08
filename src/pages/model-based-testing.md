@@ -1,5 +1,5 @@
 ---
-title: (Poor man’s) model-based testing with F# & FsCheck
+title: Cheap model-based testing with F# & FsCheck
 publishDate: "2017-02-01"
 layout: '../layouts/BlogPost.astro'
 ---
