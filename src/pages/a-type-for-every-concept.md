@@ -47,41 +47,12 @@ Even internally (not at the edges of the system), prefer types to preconditions.
 If some identifier should be case-insensitive, you can enforce this with its own type:
 
 ```csharp
-struct Identifier
-    : IEquatable<Identifier>
-{
-    private static StringComparer Comparer
-        = StringComparer.OrdinalIgnoreCase;
-
-    public Identifier(string value)
-    {
-        Value = value;
-    }
-
-    public string Value { get; }
-    public override string ToString() => Value;
-
-    public override int GetHashCode()
-        => Comparer.GetHashCode(Value);
-
-    public bool Equals(Identifier other)
-        => Comparer.Equals(Value, other.Value);
-
-    public override bool Equals(object obj)
-    {
-        var other = obj as Identifier?;
-        return other.HasValue && Equals(other.Value);
-    }
-
-    public static bool operator ==(Identifier left, Identifier right)
-        => left.Equals(right);
-
-    public static bool operator !=(Identifier left, Identifier right)
-        => !left.Equals(right);
+record struct Identifier(string Value) {
+    private static readonly StringComparer _comparer = StringComparer.OrdinalIgnoreCase;
+    public override int GetHashCode() => _comparer.GetHashCode(Value);
+    public bool Equals(Identifier other) => _comparer.Equals(Value, other.Value);
 }
 ```
-
-Unfortunately, this is a little verbose in C#. However, you don’t need to think about it that much as it’s all boilerplate.
 
 In fact, if you ever see a `Dictionary<string, T>` being created with `StringComparison.CaseInsensitive`, it’s a good sign that the `string` should be changed into a distinct type. This ensures that the treatment of the value is the same everywhere that it’s used.
 
