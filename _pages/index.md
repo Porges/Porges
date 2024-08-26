@@ -7,13 +7,15 @@ permalink: /
 
 # Welcome!
 
-This is the <em>n</em>th, and maybe final (ha!), iteration of my personal website. 
+This is the <em>n</em>th, and maybe final (ha!), iteration of my personal website. (I am not related to [George Pollard,](https://en.wikipedia.org/wiki/George_Pollard_Jr.) the captain of the ill-fated whaleship <cite>Essex</cite>, but I have read <cite>Moby Dick</cite>.)
 
-This time around it takes the form of a collection of notes rather than attempting (and failing) to function as a blog.
+This time around my personal site takes the form of a collection of notes rather than attempting (and failing) to function as a blog.
+
 
 Some entry points:
 
 - <a href="interests">My (Current) Interests</a>
+- <a href="publications">My (Few) Publications</a>
 
 ## Elsewhere
 
