@@ -5,17 +5,36 @@ id: home
 permalink: /
 ---
 
-# Welcome! 🌱
+# Welcome!
 
-<p style="padding: 3em 1em; background: #f5f7ff; border-radius: 4px;">
-  Take a look at <span style="font-weight: bold">[[Your first note]]</span> to get started on your exploration.
-</p>
+This is the <em>n</em>th, and maybe final (ha!), iteration of my personal website. 
 
-This digital garden template is free, open-source, and [available on GitHub here](https://github.com/maximevaillancourt/digital-garden-jekyll-template).
+This time around it takes the form of a collection of notes rather than attempting (and failing) to function as a blog.
 
-The easiest way to get started is to read this [step-by-step guide explaining how to set this up from scratch](https://maximevaillancourt.com/blog/setting-up-your-own-digital-garden-with-jekyll).
+Some entry points:
 
-<strong>Recently updated notes</strong>
+- <a href="interests">My (Current) Interests</a>
+
+## Elsewhere
+
+My other sites are:
+
+- [Ways to Play](https://games.porg.es/), a site about traditional board and card games
+
+You can also find me on:
+
+- Bluesky: [@porg.es](https://bsky.app/profile/porg.es)
+- [Goodreads](https://www.goodreads.com/user/show/4220815-george-pollard)
+- Mastodon: [@porges@toot.cafe](https://toot.cafe/@porges)
+  - note that I do not check this very often
+
+### Previously
+
+I was previously on these sites but no longer use them:
+
+- Twitter: [@porges](https://twitter.com/porges)
+
+## Recently updated
 
 <ul>
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
