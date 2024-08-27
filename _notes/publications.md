@@ -5,21 +5,9 @@ I would not call myself _published_, but this page collects together various bit
 
 ## Standards Documents
 
-### (2023) Proposal to encode Geomantic Figures
+### (2023) Unicode Proposal to encode Geomantic Figures
 
-A Unicode proposal to encode the Geomantic Figures. The Unicode document reference is [L2/23-218](https://www.unicode.org/L2/L2023/23218-geomancy.pdf).
-
-The timeline, if it is of interest to other potential proposal authors:
-- June 2023: submitted to the Unicode Script Ad-Hoc Group
-- 18th August 2023: reviewed by Script Ad-Hoc
-- 28th August 2023: received feedback from SAH
-- 4th September 2023: updated submission after feedback
-- 15th September 2023: re-reviewed by SAH, agreed to recommend to UTC
-- 20th September 2023: received this information from SAH
-- 2nd November 2023: UTC meeting #177 day 2, UTC [agreed to provisionally assign the characters](https://www.unicode.org/L2/L2023/23231.htm#177-C34:~:text=Provisionally%20assign%2016%20code%20points%20U%2B1CEE0..U%2B1CEEF%20for%20geomantic%20figures)
-- 4th November 2023: received this information from SAH
-
-The characters are currently in the [Proposed New Characters](https://www.unicode.org/alloc/Pipeline.html) pipeline.
+See [[Geomantic Figures Proposal]] for details.
 ## Talks & Presentations
 
 ### (2023) “An Occult History of Computing”
