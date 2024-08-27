@@ -71,7 +71,7 @@
             let weight =
               3 *
               Math.sqrt(
-                linksData.filter((l) => l.source.id === el.id || l.target.id === el.id)
+                linksData.filter((l) => l.source.path === el.path || l.target.path === el.path)
                   .length + 1
               );
             if (weight < MINIMAL_NODE_SIZE) {
@@ -79,7 +79,7 @@
             } else if (weight > MAX_NODE_SIZE) {
               weight = MAX_NODE_SIZE;
             }
-            nodeSize[el.id] = weight;
+            nodeSize[el.path] = weight;
           });
         };
 
@@ -90,34 +90,34 @@
         const onMouseover = function (d) {
           const relatedNodesSet = new Set();
           linksData
-            .filter((n) => n.target.id == d.id || n.source.id == d.id)
+            .filter((n) => n.target.path == d.path || n.source.path == d.path)
             .forEach((n) => {
-              relatedNodesSet.add(n.target.id);
-              relatedNodesSet.add(n.source.id);
+              relatedNodesSet.add(n.target.path);
+              relatedNodesSet.add(n.source.path);
             });
 
           node.attr("class", (node_d) => {
-            if (node_d.id !== d.id && !relatedNodesSet.has(node_d.id)) {
+            if (node_d.path !== d.path && !relatedNodesSet.has(node_d.path)) {
               return "inactive";
             }
             return "";
           });
 
           link.attr("class", (link_d) => {
-            if (link_d.source.id !== d.id && link_d.target.id !== d.id) {
+            if (link_d.source.path !== d.path && link_d.target.path !== d.path) {
               return "inactive";
             }
             return "";
           });
 
           link.attr("stroke-width", (link_d) => {
-            if (link_d.source.id === d.id || link_d.target.id === d.id) {
+            if (link_d.source.path === d.path || link_d.target.path === d.path) {
               return STROKE * 4;
             }
             return STROKE;
           });
           text.attr("class", (text_d) => {
-            if (text_d.id !== d.id && !relatedNodesSet.has(text_d.id)) {
+            if (text_d.path !== d.path && !relatedNodesSet.has(text_d.path)) {
               return "inactive";
             }
             return "";
@@ -138,11 +138,11 @@
 
           const map = new Map();
           for (const node of previous) {
-            map.set(node.id, node.label);
+            map.set(node.path, node.label);
           }
 
           for (const node of next) {
-            const found = map.get(node.id);
+            const found = map.get(node.path);
             if (!found || found !== node.title) {
               return false;
             }
@@ -158,11 +158,11 @@
 
           const set = new Set();
           for (const edge of previous) {
-            set.add(`${edge.source.id}-${edge.target.id}`);
+            set.add(`${edge.source.path}-${edge.target.path}`);
           }
 
           for (const edge of next) {
-            if (!set.has(`${edge.source.id}-${edge.target.id}`)) {
+            if (!set.has(`${edge.source.path}-${edge.target.path}`)) {
               return false;
             }
           }
@@ -197,7 +197,7 @@
             "link",
             d3
               .forceLink(linksData)
-              .id((d) => d.id)
+              .id((d) => d.path)
               .distance(70)
           )
           .force("center", d3.forceCenter(width / 2, height / 2))
@@ -224,19 +224,19 @@
           text.attr("y", (d) => d.y - zoomOrKeep(FONT_BASELINE) + 8);
           link.attr("stroke-width", zoomOrKeep(STROKE));
           node.attr("r", (d) => {
-            return zoomOrKeep(nodeSize[d.id]);
+            return zoomOrKeep(nodeSize[d.path]);
           });
           svg
             .selectAll("circle")
             .filter((_d, i, nodes) => d3.select(nodes[i]).attr("active"))
-            .attr("r", (d) => zoomOrKeep(ACTIVE_RADIUS_FACTOR * nodeSize[d.id]));
+            .attr("r", (d) => zoomOrKeep(ACTIVE_RADIUS_FACTOR * nodeSize[d.path]));
         };
 
         const ticked = () => {
           node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
           text
             .attr("x", (d) => d.x)
-            .attr("y", (d) => d.y - (FONT_BASELINE - nodeSize[d.id]) / zoomLevel);
+            .attr("y", (d) => d.y - (FONT_BASELINE - nodeSize[d.path]) / zoomLevel);
           link
             .attr("x1", (d) => d.source.x)
             .attr("y1", (d) => d.source.y)
@@ -246,20 +246,20 @@
 
         const restart = () => {
           updateNodeSize();
-          node = node.data(nodesData, (d) => d.id);
+          node = node.data(nodesData, (d) => d.path);
           node.exit().remove();
           node = node
             .enter()
             .append("circle")
             .attr("r", (d) => {
-              return nodeSize[d.id];
+              return nodeSize[d.path];
             })
             .on("click", onClick)
             .on("mouseover", onMouseover)
             .on("mouseout", onMouseout)
             .merge(node);
 
-          link = link.data(linksData, (d) => `${d.source.id}-${d.target.id}`);
+          link = link.data(linksData, (d) => `${d.source.path}-${d.target.path}`);
           link.exit().remove();
           link = link.enter().append("line").attr("stroke-width", STROKE).merge(link);
 

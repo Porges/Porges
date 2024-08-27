@@ -1,6 +1,8 @@
 ---
 title: Interruption Testing
 date: 2022-02-20
+tags:
+- software-testing
 ---
 This post is an attempt to capture a general description of a simple testing technique I have encountered in a few guises — and “Interruption testing” is my attempt to give it a name.
 

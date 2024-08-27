@@ -1,6 +1,8 @@
 ---
 title: Cheap model-based testing with F# & FsCheck
 date: 2017-02-01
+tags:
+- software-testing
 ---
 _This is a blog version of a talk that I did ~2015 in Auckland. Nothing in it is original or unknown, but there aren’t that many examples of doing this aside from [in the FsCheck documentation](https://fscheck.github.io/FsCheck/StatefulTesting.html). I also gave [a talk which contains a very similar example](https://www.youtube.com/watch?v=8oALNLdyOyM) to the Melbourne ALT.NET meetup in 2018._
 ### What is FsCheck?

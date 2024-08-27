@@ -1,5 +1,7 @@
 ---
 date: 2000-01-02
+tags:
+- software-design
 ---
 _There’s no such thing as a null strategy!_
 

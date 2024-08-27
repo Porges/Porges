@@ -1,5 +1,7 @@
 ---
 date: 2000-01-03
+tags:
+- software-design
 ---
 _Alternate titles: Purging Pluralities, Collapsing Cardinality._
 

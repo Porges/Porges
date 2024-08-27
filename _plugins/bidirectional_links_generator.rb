@@ -72,6 +72,8 @@ class BidirectionalLinksGenerator < Jekyll::Generator
         HTML
       )
     end
+    
+    tags = Set[]
 
     # Identify note backlinks and add them to each note
     all_notes.each do |current_note|
@@ -79,10 +81,17 @@ class BidirectionalLinksGenerator < Jekyll::Generator
       notes_linking_to_current_note = all_notes.filter do |e|
         e.content.include?(current_note.url)
       end
+      
+      current_note.data['tags'].each do |tag|
+        tags << tag
+        graph_edges << {
+          source: current_note.url,
+          target: "/tag/#{tag}",
+        }
+      end
 
       # Nodes: Graph
       graph_nodes << {
-        id: note_id_from_note(current_note),
         path: "#{site.baseurl}#{current_note.url}#{link_extension}",
         label: current_note.data['title'],
       } unless current_note.path.include?('_notes/index.html')
@@ -93,19 +102,22 @@ class BidirectionalLinksGenerator < Jekyll::Generator
       # Edges: Graph
       notes_linking_to_current_note.each do |n|
         graph_edges << {
-          source: note_id_from_note(n),
-          target: note_id_from_note(current_note),
+          source: n.url,
+          target: current_note.url,
         }
       end
+    end
+    
+    tags.each do |tag|
+      graph_nodes << {
+        path: "/tag/#{tag}",
+        label: "\##{tag}",
+      }
     end
 
     File.write('_includes/notes_graph.json', JSON.dump({
       edges: graph_edges,
       nodes: graph_nodes,
     }))
-  end
-
-  def note_id_from_note(note)
-    note.data['title'].bytes.join
   end
 end

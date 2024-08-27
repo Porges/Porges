@@ -1,5 +1,7 @@
 ---
 title: Aphorisms
+tags: 
+- programming
 ---
 Something that has worked well for me several times (twice so far) is coming up with a catchy aphorism and then getting other people to write about it.
 
@@ -10,4 +12,3 @@ Turned into the article “[Pass implementations, not representations](https://w
 ### parse, don’t validate
 
 [This](https://web.archive.org/web/20220717204556/https://twitter.com/porges/status/931305154372161536) was turned into the wonderful “[Parse, don’t validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)” (2019) by Alexis King.
-
