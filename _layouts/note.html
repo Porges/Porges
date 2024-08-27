@@ -21,7 +21,7 @@ layout: default
       <h3>Tags</h3>
       <ul>
       {% for tag in page.tags %}
-      <li><a href="{{site.baseurl}}/tag/{{tag}}">{{tag}}</a></li>
+      <li><a href="{{site.baseurl}}/tag/{{tag}}" class="internal-link">{{tag}}</a></li>
       {% endfor %}
       </ul>
       {% endif %}

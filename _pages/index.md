@@ -14,8 +14,8 @@ This time around my personal site takes the form of a collection of notes rather
 
 Some entry points:
 
-- <a href="interests">My (Current) Interests</a>
-- <a href="publications">My (Few) Publications</a>
+- <a class="internal-link" href="interests">My (Current) Interests</a>
+- <a class="internal-link" href="publications">My (Few) Publications</a>
 
 ## Elsewhere
 

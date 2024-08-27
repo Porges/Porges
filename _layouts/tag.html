@@ -7,7 +7,7 @@ layout: default
 <ul>
     {% for post in site.notes %}
     {% if post.tags contains page.tag %}
-    <li><a class="post" href="{{ post.url }}">{{ post.title }}</a></li>
+    <li><a class="post internal-link" href="{{ post.url }}">{{ post.title }}</a></li>
     {% endif %}
     {% endfor %}
 </ul>
