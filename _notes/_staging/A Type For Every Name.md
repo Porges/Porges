@@ -12,15 +12,15 @@ For every concept your code cares about, there should be a type. I’m not just 
 
 A username is probably not “just a string”, just like XML is not just a string, an email is not just a string, and a phone number is not just a string. (Also, an index is not a count, and vice versa. But that’s for another post.)
 
-So... give them their own types!
+So give them their own types!
 
-**Tip: it’s probably cheap!** Typed languages often have zero-cost (or near-zero-cost) abstraction into new types. This includes C#/F# (structs), Haskell (newtypes), C++ (all classes).
+**Tip: it’s probably cheap!** Typed languages often have zero-cost (or near-zero-cost) abstraction into new types. This includes Rust/C++, C#/F# (structs), Haskell (newtypes).
 
-Here are some more reasons. The examples are going to be in C# as it’s my mother tongue, but they are mostly applicable everywhere.
+Here are some more reasons:
 
 #### Avoid nonsense values
 
-This is also known as “make illegal states unrepresentable”.
+This is also known as “making illegal states unrepresentable”.
 
 In most cases, something that is represented by a primitive type won’t have all of the possible values of that type be valid values. For example, a person’s age or height represented by an `int` can’t be a negative number.
 

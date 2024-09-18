@@ -12,3 +12,5 @@ Turned into the article “[Pass implementations, not representations](https://w
 ### parse, don’t validate
 
 [This](https://web.archive.org/web/20220717204556/https://twitter.com/porges/status/931305154372161536) was turned into the wonderful “[Parse, don’t validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)” (2019) by Alexis King.
+
+The original thing I was working on writing back in 2017 (“a type for every concept”) I never actually got around to publishing at the time. But there’s a hint of this in the [early draft](https://github.com/Porges/Porges/commit/637feafd48b57e48eae96af8743f532b36de9d0e#:~:text=Also%2C%20prefer%20normalization%20to%20simple%20validation.).
