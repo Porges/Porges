@@ -9,7 +9,7 @@ What would you call a function that is incorrect 99.999999% of the time? Broken?
 
 Let’s take a look: what happens if you multiply two (unsigned) 4-bit numbers?
 
-<table  style="font-family: monospace">
+<table  style="font-family: monospace; text-align: center">
     <thead>
         <tr>
             <th>×</th>
