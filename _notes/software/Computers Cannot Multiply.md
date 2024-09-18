@@ -5,34 +5,345 @@ tags:
   - software-horrors
 ---
 
-To a first approximation, computers cannot multiply. What would you call a function that is incorrect 99.999999% of the time? Broken?
+What would you call a function that is incorrect 99.999999% of the time? Broken?
 
-Let’s take a look: if you multiply two (unsigned) 4-bit numbers
+Let’s take a look: what happens if you multiply two (unsigned) 4-bit numbers?
 
-|      | 0000 | 0001 | 0010 | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 | 1010 | 1011 | 1100 | 1101 | 1110 | 1111 | 
-| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 | 0000 |
-| 0001 | 0000 | 0001 | 0010 | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 | 1010 | 1011 | 1100 | 1101 | 1110 | 1111 |
-| 0010 | 0000 | 0010 | 0100 | 0110 | 1000 | 1010 | 1100 | 1110 | NO | NO | NO | NO | NO | NO | NO | NO |
-| 0011 | 0000 | 0011 | 0110 | 1001 | 1100 | 1111 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 0100 | 0000 | 0100 | 1000 | 1100 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 0101 | 0000 | 0101 | 1010 | 1111 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 0110 | 0000 | 0110 | 1100 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 0111 | 0000 | 0111 | 1110 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 1000 | 0000 | 1000 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 1001 | 0000 | 1001 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 1010 | 0000 | 1010 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 1011 | 0000 | 1011 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 1100 | 0000 | 1100 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 1101 | 0000 | 1101 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 1110 | 0000 | 1110 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
-| 1111 | 0000 | 1111 | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO |
+<table  style="font-family: monospace">
+    <thead>
+        <tr>
+            <th>×</th>
+            <th>0000</th>
+            <th>0001</th>
+            <th>0010</th>
+            <th>0011</th>
+            <th>0100</th>
+            <th>0101</th>
+            <th>0110</th>
+            <th>0111</th>
+            <th>1000</th>
+            <th>1001</th>
+            <th>1010</th>
+            <th>1011</th>
+            <th>1100</th>
+            <th>1101</th>
+            <th>1110</th>
+            <th>1111</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">0000</th>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+            <td>0000</td>
+        </tr>
+        <tr>
+            <th scope="row">0001</th>
+            <td>0000</td>
+            <td>0001</td>
+            <td>0010</td>
+            <td>0011</td>
+            <td>0100</td>
+            <td>0101</td>
+            <td>0110</td>
+            <td>0111</td>
+            <td>1000</td>
+            <td>1001</td>
+            <td>1010</td>
+            <td>1011</td>
+            <td>1100</td>
+            <td>1101</td>
+            <td>1110</td>
+            <td>1111</td>
+        </tr>
+        <tr>
+            <th scope="row">0010</th>
+            <td>0000</td>
+            <td>0010</td>
+            <td>0100</td>
+            <td>0110</td>
+            <td>1000</td>
+            <td>1010</td>
+            <td>1100</td>
+            <td>1110</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">0011</th>
+            <td>0000</td>
+            <td>0011</td>
+            <td>0110</td>
+            <td>1001</td>
+            <td>1100</td>
+            <td>1111</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">0100</th>
+            <td>0000</td>
+            <td>0100</td>
+            <td>1000</td>
+            <td>1100</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">0101</th>
+            <td>0000</td>
+            <td>0101</td>
+            <td>1010</td>
+            <td>1111</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">0110</th>
+            <td>0000</td>
+            <td>0110</td>
+            <td>1100</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">0111</th>
+            <td>0000</td>
+            <td>0111</td>
+            <td>1110</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">1000</th>
+            <td>0000</td>
+            <td>1000</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">1001</th>
+            <td>0000</td>
+            <td>1001</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">1010</th>
+            <td>0000</td>
+            <td>1010</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">1011</th>
+            <td>0000</td>
+            <td>1011</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">1100</th>
+            <td>0000</td>
+            <td>1100</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">1101</th>
+            <td>0000</td>
+            <td>1101</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">1110</th>
+            <td>0000</td>
+            <td>1110</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+        <tr>
+            <th scope="row">1111</th>
+            <td>0000</td>
+            <td>1111</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+            <td>NO</td>
+        </tr>
+    </tbody>
+</table>
 
 - All numbers multiplied by zero or one are okay.
 - If we multiply by 2, half the numbers are incorrect.
 - If we multiply by 3, two-thirds of the numbers are incorrect.
 - If we multiply by 4, three-quarters of the numbers are incorrect.
-- ...
+- etc
 
 So for four-bit numbers, out of 256 possible combinations, 180 results are incorrect, and 76 results are correct. This makes the result incorrect about 70% of the time.
 
@@ -40,7 +351,11 @@ But: it gets much, much worse the more bits your numbers have. The possible valu
 
 | Length | Possible results     |    Incorrect results | Percentage incorrect |
 | -----: | -------------------: | -------------------: | -------------------: |
+| 4 | 256 | 180 | 70% |
 |      8 | 65536                |                63568 | 97%                  |
 |     16 | 4294967296           |           4294099268 | 99.98%               |
 |     32 | 18446744073709552000 | 18446743969190916110 | 99.999999%           |
+
 Thus, 32-bit multiplication is incorrect 99.999999% of the time.
+
+The next fun thing to consider is why computers seem to be able to multiply, despite not being able to.
