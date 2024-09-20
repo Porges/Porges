@@ -1,6 +1,0 @@
-{
-  "moduleResolution": "node",
-  "compilerOptions": {
-    "noEmit": true,
-  },
-}
