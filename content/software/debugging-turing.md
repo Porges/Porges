@@ -216,9 +216,9 @@ Now you see why we needed to import ‘delay’… since Scheme is a strictly-ev
 
 Other than that it is fairly straightforward, each state has a list of _m_-configurations, each of which has a list of what symbols it accepts, the actions to take, and the next state to move to. After we letrec, we have the initial state defined as the ‘machine’—in this case, `b`.
 
-```scheme
 We can run this machine like so:
 
+```scheme
 (define (go t m)
  (do ([tm (list t m)])
   ((eqv? tm #f) (car tm))
