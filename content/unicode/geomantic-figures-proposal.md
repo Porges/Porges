@@ -4,6 +4,7 @@ tags:
   - unicode
 aliases:
   - Geomantic Figures Proposal
+permalink: geomantic-figures-proposal
 ---
 This is a Unicode proposal to encode the Geomantic Figures. The Unicode document reference is [L2/23-218](https://www.unicode.org/L2/L2023/23218-geomancy.pdf).
 
