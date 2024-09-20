@@ -1,6 +1,8 @@
 ---
 title: So, it turns out that .NET’s Regex are more powerful t̖̱̍ͭ͊h̟ͨͨa̞̖̙̔̇n͇̝͚̤̒́ͨ̐ ̯͖̏̌̔Ị̟̮̱̥̇̐̎͂ͬ͗̒ ̪̹̱͙̘ͦ̉ͪͪͣ̉͊o͕̥̝͇͙ͪ͊ͤ̑̂̽́r͔̭̪̮̟͗̍ͨ͗͛ͣḭ̝̜͈ͫ́g̥̹̥̜̦̓̇̓i̪͕̭̞͛ͯ̓͛̔̾ͫn̘̗a̰̜ͨͪ͊l̩͑̐̐́ͥ̚l̜ͨ͋̈ẙͦ́ ̟̬̬̫͙̤ͭ̚t̳͎̱̗̲́h͔͙̰̬̊̈́͊̾o͉ͫ̌̄u͉̲̥g̏ͥ̑̅̽̇h̻͇̥̰̯ͥͯṱ̯̏̄̒͒ͫ̃.͖̟͍̘̼̼̍̐̀͊̓́…
 date: 2011-05-10
+tags:
+  - software-horrors
 ---
 
 Today, thanks to user [Lucero](http://stackoverflow.com/users/88558/lucero) on StackOverflow, I learned about .NET’s “Balancing Groups” Regex feature.
