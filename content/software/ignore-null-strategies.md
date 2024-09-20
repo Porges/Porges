@@ -1,5 +1,5 @@
 ---
-date: 2000-01-02
+date: 2017-01-17
 tags:
   - software-design
 title: Ignore Null Strategies
@@ -9,6 +9,7 @@ _There’s no such thing as a null strategy!_
 Here is a simple refactoring/micro-pattern that can help remove a little complexity from classes that use passed-in behaviours/strategies/handlers/whatever you want to call them.[^1] The examples given here may seem rather abstract or “enterprisey”, but it’s something that comes up repeatedly when developing software.
 
 [^1]: Here I’m going to use strategy in a broad sense, to basically include any behaviour that is injected into a class. Other people might call these collaborators (although I’d apply that to the implementations of the strategy and not the strategy abstraction itself), or something different.
+
 ### The problem: Checking strategies for nullness
 
 Below is a very simplified example of a consumer (the class `ProducerExample`) of the `IProducer` strategy. The consumer explicitly checks if the strategy is null before invoking it, and if it _is_ null, it produces some default value instead.

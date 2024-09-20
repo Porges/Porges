@@ -1,5 +1,5 @@
 ---
-date: 2000-01-03
+date: 2017-01-17
 tags:
   - software-design
 title: Managing Multiplicity
