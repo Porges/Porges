@@ -116,77 +116,342 @@ Console.WriteLine(Regex.Match(testDoc, document, RegexOptions.IgnorePatternWhite
 
 And here’s the regex (with apologies to [Mail::RFC822::Address](http://www.ex-parrot.com/pdw/Mail-RFC822-Address.html)):
 
-<pre><code style="white-space:nowrap">^(?'localPart'((((\((((?'paren'\()|(?'-paren'\))|([\u0021-\u<br>
-0027\u002a-\u005b\u005d-\u007e]|[\u0001-\u0008\u000b\u000c\u<br>
-000e-\u001f\u007f])|([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)|<br>
-\\([\u0021-\u007e]|[ \t]|[\r\n\0]|[\u0001-\u0008\u000b\u000c<br>
-\u000e-\u001f\u007f]))*(?(paren)(?!)))\))|([ \t]+((\r\n)[ \t<br>
-]+)?|((\r\n)[ \t]+)+))*?(([a-zA-Z0-9!#$%&amp;'*+/=?^_`{|}~-]+)|(<br>
-"(([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)?(([\u0021\u0023-\u<br>
-005b\u005d-\u007e]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u<br>
-007f])|\\([\u0021-\u007e]|[ \t]|[\r\n\0]|[\u0001-\u0008\u000<br>
-b\u000c\u000e-\u001f\u007f])))*([ \t]+((\r\n)[ \t]+)?|((\r\n<br>
-)[ \t]+)+)?"))((\((((?'paren'\()|(?'-paren'\))|([\u0021-\u00<br>
-27\u002a-\u005b\u005d-\u007e]|[\u0001-\u0008\u000b\u000c\u00<br>
-0e-\u001f\u007f])|([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)|\\<br>
-([\u0021-\u007e]|[ \t]|[\r\n\0]|[\u0001-\u0008\u000b\u000c\u<br>
-000e-\u001f\u007f]))*(?(paren)(?!)))\))|([ \t]+((\r\n)[ \t]+<br>
-)?|((\r\n)[ \t]+)+))*?)(\.(((\((((?'paren'\()|(?'-paren'\))|<br>
-([\u0021-\u0027\u002a-\u005b\u005d-\u007e]|[\u0001-\u0008\u0<br>
-00b\u000c\u000e-\u001f\u007f])|([ \t]+((\r\n)[ \t]+)?|((\r\n<br>
-)[ \t]+)+)|\\([\u0021-\u007e]|[ \t]|[\r\n\0]|[\u0001-\u0008\<br>
-u000b\u000c\u000e-\u001f\u007f]))*(?(paren)(?!)))\))|([ \t]+<br>
-((\r\n)[ \t]+)?|((\r\n)[ \t]+)+))*?(([a-zA-Z0-9!#$%&amp;'*+/=?^_<br>
-`{|}~-]+)|("(([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)?(([\u00<br>
-21\u0023-\u005b\u005d-\u007e]|[\u0001-\u0008\u000b\u000c\u00<br>
-0e-\u001f\u007f])|\\([\u0021-\u007e]|[ \t]|[\r\n\0]|[\u0001-<br>
-\u0008\u000b\u000c\u000e-\u001f\u007f])))*([ \t]+((\r\n)[ \t<br>
-]+)?|((\r\n)[ \t]+)+)?"))((\((((?'paren'\()|(?'-paren'\))|([<br>
-\u0021-\u0027\u002a-\u005b\u005d-\u007e]|[\u0001-\u0008\u000<br>
-b\u000c\u000e-\u001f\u007f])|([ \t]+((\r\n)[ \t]+)?|((\r\n)[<br>
-\t]+)+)|\\([\u0021-\u007e]|[ \t]|[\r\n\0]|[\u0001-\u0008\u0<br>
-00b\u000c\u000e-\u001f\u007f]))*(?(paren)(?!)))\))|([ \t]+((<br>
-\r\n)[ \t]+)?|((\r\n)[ \t]+)+))*?))*))@(?'domain'((((\((((?'<br>
-paren'\()|(?'-paren'\))|([\u0021-\u0027\u002a-\u005b\u005d-\<br>
-u007e]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f])|([ \t<br>
-]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)|\\([\u0021-\u007e]|[ \t]|<br>
-[\r\n\0]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f]))*(?<br>
-(paren)(?!)))\))|([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+))*?(<br>
-([a-zA-Z0-9!#$%&amp;'*+/=?^_`{|}~-]+)|("(([ \t]+((\r\n)[ \t]+)?|<br>
-((\r\n)[ \t]+)+)?(([\u0021\u0023-\u005b\u005d-\u007e]|[\u000<br>
-1-\u0008\u000b\u000c\u000e-\u001f\u007f])|\\([\u0021-\u007e]<br>
-|[ \t]|[\r\n\0]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007<br>
-f])))*([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)?"))((\((((?'pa<br>
-ren'\()|(?'-paren'\))|([\u0021-\u0027\u002a-\u005b\u005d-\u0<br>
-07e]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f])|([ \t]+<br>
-((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)|\\([\u0021-\u007e]|[ \t]|[\<br>
-r\n\0]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f]))*(?(p<br>
-aren)(?!)))\))|([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+))*?)(\<br>
-.(((\((((?'paren'\()|(?'-paren'\))|([\u0021-\u0027\u002a-\u0<br>
-05b\u005d-\u007e]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u0<br>
-07f])|([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)|\\([\u0021-\u0<br>
-07e]|[ \t]|[\r\n\0]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\<br>
-u007f]))*(?(paren)(?!)))\))|([ \t]+((\r\n)[ \t]+)?|((\r\n)[<br>
-\t]+)+))*?(([a-zA-Z0-9!#$%&amp;'*+/=?^_`{|}~-]+)|("(([ \t]+((\r\<br>
-n)[ \t]+)?|((\r\n)[ \t]+)+)?(([\u0021\u0023-\u005b\u005d-\u0<br>
-07e]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f])|\\([\u0<br>
-021-\u007e]|[ \t]|[\r\n\0]|[\u0001-\u0008\u000b\u000c\u000e-<br>
-\u001f\u007f])))*([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)?"))<br>
-((\((((?'paren'\()|(?'-paren'\))|([\u0021-\u0027\u002a-\u005<br>
-b\u005d-\u007e]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007<br>
-f])|([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)|\\([\u0021-\u007<br>
-e]|[ \t]|[\r\n\0]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u0<br>
-07f]))*(?(paren)(?!)))\))|([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t<br>
-]+)+))*?))*)|(((\((((?'paren'\()|(?'-paren'\))|([\u0021-\u00<br>
-27\u002a-\u005b\u005d-\u007e]|[\u0001-\u0008\u000b\u000c\u00<br>
-0e-\u001f\u007f])|([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)|\\<br>
-([\u0021-\u007e]|[ \t]|[\r\n\0]|[\u0001-\u0008\u000b\u000c\u<br>
-000e-\u001f\u007f]))*(?(paren)(?!)))\))|([ \t]+((\r\n)[ \t]+<br>
-)?|((\r\n)[ \t]+)+))*?\[(([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]<br>
-+)+)?([!-Z^-~]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f<br>
-]))*([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+)?\]((\((((?'paren<br>
-'\()|(?'-paren'\))|([\u0021-\u0027\u002a-\u005b\u005d-\u007e<br>
-]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f])|([ \t]+((\<br>
-r\n)[ \t]+)?|((\r\n)[ \t]+)+)|\\([\u0021-\u007e]|[ \t]|[\r\n<br>
-\0]|[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f]))*(?(pare<br>
-n)(?!)))\))|([ \t]+((\r\n)[ \t]+)?|((\r\n)[ \t]+)+))*?))$</code></pre>
+<pre><code style="white-space:nowrap">^(?'xmlDecl'&lt;\?xml(?'versionInfo'([\u0020\u0009\u000d\u000a]+)version(?'eq'([\u0<br>
+020\u0009\u000d\u000a]+)?=([\u0020\u0009\u000d\u000a]+)?)('1\.[0-9]+'|"1\.[0-9]+<br>
+"))(?'encodingDecl'([\u0020\u0009\u000d\u000a]+)encoding(?'eq'([\u0020\u0009\u00<br>
+0d\u000a]+)?=([\u0020\u0009\u000d\u000a]+)?)("(?'encName'[A-Za-z][A-Za-z0-9._-]*<br>
+)"|'(?'encName'[A-Za-z][A-Za-z0-9._-]*)'))?(?'sddecl'([\u0020\u0009\u000d\u000a]<br>
++)standalone(?'eq'([\u0020\u0009\u000d\u000a]+)?=([\u0020\u0009\u000d\u000a]+)?)<br>
+("(yes|no)"|'(yes|no)'))?([\u0020\u0009\u000d\u000a]+)?\?&gt;)?(?'misc'(?'comment'&lt;<br>
+!--((?!--)([\u0009\u000a\u000d\u0020-\ud7ff\ue000-\ufffd]|([\ud800-\udbff][\udc0<br>
+0-\udfff])))*--&gt;)|(?'PI'&lt;\?(?'pitarget'(?![xX][mM][lL])(?'name'([:A-Z_a-z\u00C0-<br>
+\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u<br>
+218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc0<br>
+0-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F<br>
+-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\<br>
+uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040]<br>
+)*))(([\u0020\u0009\u000d\u000a]+)((?!\?&gt;)([\u0009\u000a\u000d\u0020-\ud7ff\ue00<br>
+0-\ufffd]|([\ud800-\udbff][\udc00-\udfff])))*)?\?&gt;)|([\u0020\u0009\u000d\u000a]+<br>
+))*((?'doctypedecl'&lt;!DOCTYPE([\u0020\u0009\u000d\u000a]+)(?'name'([:A-Z_a-z\u00C<br>
+0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-<br>
+\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\ud<br>
+c00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u03<br>
+7F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0<br>
+-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u204<br>
+0])*)(([\u0020\u0009\u000d\u000a]+)(?'externalID'SYSTEM([\u0020\u0009\u000d\u000<br>
+a]+)(?'systemLiteral'"[^"]*"|'[^']*')|PUBLIC([\u0020\u0009\u000d\u000a]+)(?'pubI<br>
+dLiteral'"[a-zA-Z0-9'()+,./:=?;!*#@$_%\u0020\u000d\u000a-]*"|'((?!')[a-zA-Z0-9'(<br>
+)+,./:=?;!*#@$_%\u0020\u000d\u000a-])*')([\u0020\u0009\u000d\u000a]+)(?'systemLi<br>
+teral'"[^"]*"|'[^']*')))?([\u0020\u0009\u000d\u000a]+)?(\[(?'intSubSet'((?'marku<br>
+pdecl'(?'elementdecl'&lt;!ELEMENT([\u0020\u0009\u000d\u000a]+)(?'name'([:A-Z_a-z\u0<br>
+0C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u207<br>
+0-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\<br>
+udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u<br>
+037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFD<br>
+F0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2<br>
+040])*)([\u0020\u0009\u000d\u000a]+)(?'contentspec'EMPTY|ANY|(?'mixed'\(([\u0020<br>
+\u0009\u000d\u000a]+)?\#PCDATA(([\u0020\u0009\u000d\u000a]+)?\|([\u0020\u0009\u0<br>
+00d\u000a]+)?(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u0<br>
+37D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDC<br>
+F\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-<br>
+\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u<br>
+2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[<br>
+-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*))*([\u0020\u0009\u000d\u000a]+)?\)\*|\(<br>
+([\u0020\u0009\u000d\u000a]+)?\#PCDATA([\u0020\u0009\u000d\u000a]+)?\))|(?'child<br>
+ren'unsureifpossible))([\u0020\u0009\u000d\u000a]+)?&gt;)|(?'attlist'&lt;!ATTLIST([\u0<br>
+020\u0009\u000d\u000a]+)(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02F<br>
+F\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\<br>
+uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u<br>
+00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u21<br>
+8F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-<br>
+\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*)(?'attDef'([\u0020\u0009\u00<br>
+0d\u000a]+)(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037<br>
+D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\<br>
+uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u<br>
+00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2F<br>
+EF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.<br>
+0-9\u00B7\u0300-\u036F\u203F-\u2040])*)([\u0020\u0009\u000d\u000a]+)(?'attType'C<br>
+DATA|(ID(REF(S)?)?|ENTIT(Y|IES)|NMTOKENS?)|(?'enumType'(?'notation'NOTATION([\u0<br>
+020\u0009\u000d\u000a]+)\(([\u0020\u0009\u000d\u000a]+)?(?'name'([:A-Z_a-z\u00C0<br>
+-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\<br>
+u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc<br>
+00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037<br>
+F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-<br>
+\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040<br>
+])*)(([\u0020\u0009\u000d\u000a]+)?\|([\u0020\u0009\u000d\u000a]+)?(?'name'([:A-<br>
+Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u2<br>
+00D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\<br>
+udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-<br>
+\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\u<br>
+FDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u<br>
+203F-\u2040])*))*([\u0020\u0009\u000d\u000a]+)?\))|(?'enumeration'\(([\u0020\u00<br>
+09\u000d\u000a]+)?(?'nmtoken'(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\<br>
+u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF<br>
+900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u<br>
+036F\u203F-\u2040])+)(([\u0020\u0009\u000d\u000a]+)?\|([\u0020\u0009\u000d\u000a<br>
+]+)?(?'nmtoken'(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u<br>
+037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFD<br>
+F0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2<br>
+040])+))*([\u0020\u0009\u000d\u000a]+)?\))))([\u0020\u0009\u000d\u000a]+)(?'defa<br>
+ultDecl'\#REQUIRED|\#IMPLIED|(\#FIXED([\u0020\u0009\u000d\u000a]+))?(?'attValue'<br>
+"([^&lt;&amp;"]|(?'reference'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6<br>
+\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u<br>
+3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_<br>
+a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200<br>
+D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\ud<br>
+bff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);())|&amp;\#([0-9]+|<br>
+x[0-9a-fA-F]+);()))*"|'([^&lt;&amp;']|(?'reference'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00<br>
+C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070<br>
+-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\u<br>
+dc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u0<br>
+37F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF<br>
+0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u20<br>
+40])*);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);()))*')))*([\u0020\u0009\u000d\u000a]+)?&gt;)|<br>
+(?'entityDecl'(?'gedecl'&lt;!ENTITY([\u0020\u0009\u000d\u000a]+)(?'name'([:A-Z_a-z\<br>
+u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2<br>
+070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff]<br>
+[\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D<br>
+\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\u<br>
+FDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\<br>
+u2040])*)([\u0020\u0009\u000d\u000a]+)(?'entityDef'(?'entityValue'"([^%&amp;"]|%(?'n<br>
+ame'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\<br>
+u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|(<br>
+[\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02<br>
+FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF<br>
+\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300<br>
+-\u036F\u203F-\u2040])*);|(?'reference'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00C0-\u<br>
+00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u21<br>
+8F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-<br>
+\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\<br>
+u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uF<br>
+FFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*<br>
+);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);()))*"|'([^%&amp;']|%(?'name'([:A-Z_a-z\u00C0-\u00D6<br>
+\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u<br>
+2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udf<br>
+ff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FF<br>
+F\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]<br>
+|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);|(<br>
+?'reference'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u0<br>
+2FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7F<br>
+F\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-<br>
+\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u<br>
+218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc0<br>
+0-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);())|&amp;\#([0-9]+|x[0-9a-fA-<br>
+F]+);()))*')|((?'externalID'SYSTEM([\u0020\u0009\u000d\u000a]+)(?'systemLiteral'<br>
+"[^"]*"|'[^']*')|PUBLIC([\u0020\u0009\u000d\u000a]+)(?'pubIdLiteral'"[a-zA-Z0-9'<br>
+()+,./:=?;!*#@$_%\u0020\u000d\u000a-]*"|'((?!')[a-zA-Z0-9'()+,./:=?;!*#@$_%\u002<br>
+0\u000d\u000a-])*')([\u0020\u0009\u000d\u000a]+)(?'systemLiteral'"[^"]*"|'[^']*'<br>
+))(?'ndatadecl'([\u0020\u0009\u000d\u000a]+)NDATA([\u0020\u0009\u000d\u000a]+)(?<br>
+'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FF<br>
+F\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]<br>
+|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u<br>
+02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7<br>
+FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u03<br>
+00-\u036F\u203F-\u2040])*))?))([\u0020\u0009\u000d\u000a]+)?&gt;)|(?'gedecl'&lt;!ENTIT<br>
+Y([\u0020\u0009\u000d\u000a]+)%([\u0020\u0009\u000d\u000a]+)(?'name'([:A-Z_a-z\u<br>
+00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u20<br>
+70-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][<br>
+\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\<br>
+u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uF<br>
+DF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u<br>
+2040])*)([\u0020\u0009\u000d\u000a]+)(?'pedef'(?'entityValue'"([^%&amp;"]|%(?'name'(<br>
+[:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C<br>
+-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud8<br>
+00-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0<br>
+370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF90<br>
+0-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u03<br>
+6F\u203F-\u2040])*);|(?'reference'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00C0-\u00D6\<br>
+u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2<br>
+C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udff<br>
+f]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF<br>
+\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|<br>
+([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);())<br>
+|&amp;\#([0-9]+|x[0-9a-fA-F]+);()))*"|'([^%&amp;']|%(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D<br>
+8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-<br>
+\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))<br>
+(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u20<br>
+0C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\u<br>
+d800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);|(?'ref<br>
+erence'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u<br>
+0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF9<br>
+00-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D<br>
+6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\<br>
+u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\ud<br>
+fff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);<br>
+()))*')|(?'externalID'SYSTEM([\u0020\u0009\u000d\u000a]+)(?'systemLiteral'"[^"]*<br>
+"|'[^']*')|PUBLIC([\u0020\u0009\u000d\u000a]+)(?'pubIdLiteral'"[a-zA-Z0-9'()+,./<br>
+:=?;!*#@$_%\u0020\u000d\u000a-]*"|'((?!')[a-zA-Z0-9'()+,./:=?;!*#@$_%\u0020\u000<br>
+d\u000a-])*')([\u0020\u0009\u000d\u000a]+)(?'systemLiteral'"[^"]*"|'[^']*')))([\<br>
+u0020\u0009\u000d\u000a]+)?&gt;))|(?'notationDecl'&lt;!NOTATION([\u0020\u0009\u000d\u0<br>
+00a]+)(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u03<br>
+7F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0<br>
+-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\<br>
+u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3<br>
+001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u<br>
+00B7\u0300-\u036F\u203F-\u2040])*)([\u0020\u0009\u000d\u000a]+)((?'externalID'SY<br>
+STEM([\u0020\u0009\u000d\u000a]+)(?'systemLiteral'"[^"]*"|'[^']*')|PUBLIC([\u002<br>
+0\u0009\u000d\u000a]+)(?'pubIdLiteral'"[a-zA-Z0-9'()+,./:=?;!*#@$_%\u0020\u000d\<br>
+u000a-]*"|'((?!')[a-zA-Z0-9'()+,./:=?;!*#@$_%\u0020\u000d\u000a-])*')([\u0020\u0<br>
+009\u000d\u000a]+)(?'systemLiteral'"[^"]*"|'[^']*'))|(?'publicID'PUBLIC([\u0020\<br>
+u0009\u000d\u000a]+)(?'pubIdLiteral'"[a-zA-Z0-9'()+,./:=?;!*#@$_%\u0020\u000d\u0<br>
+00a-]*"|'((?!')[a-zA-Z0-9'()+,./:=?;!*#@$_%\u0020\u000d\u000a-])*')))([\u0020\u0<br>
+009\u000d\u000a]+)?&gt;)|(?'PI'&lt;\?(?'pitarget'(?![xX][mM][lL])(?'name'([:A-Z_a-z\u0<br>
+0C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u207<br>
+0-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\<br>
+udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u<br>
+037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFD<br>
+F0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2<br>
+040])*))(([\u0020\u0009\u000d\u000a]+)((?!\?&gt;)([\u0009\u000a\u000d\u0020-\ud7ff\<br>
+ue000-\ufffd]|([\ud800-\udbff][\udc00-\udfff])))*)?\?&gt;)|(?'comment'&lt;!--((?!--)([<br>
+\u0009\u000a\u000d\u0020-\ud7ff\ue000-\ufffd]|([\ud800-\udbff][\udc00-\udfff])))<br>
+*--&gt;))|(?'declSep'%(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u03<br>
+70-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900<br>
+-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\<br>
+u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2<br>
+C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udff<br>
+f]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);|([\u0020\u0009\u000d\u000a]+)))<br>
+*)\]([\u0020\u0009\u000d\u000a]+)?)?&gt;)(?'misc'(?'comment'&lt;!--((?!--)([\u0009\u00<br>
+0a\u000d\u0020-\ud7ff\ue000-\ufffd]|([\ud800-\udbff][\udc00-\udfff])))*--&gt;)|(?'P<br>
+I'&lt;\?(?'pitarget'(?![xX][mM][lL])(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u0<br>
+0F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u300<br>
+1-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z<br>
+\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u<br>
+2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff<br>
+][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*))(([\u0020\u0009\u0<br>
+00d\u000a]+)((?!\?&gt;)([\u0009\u000a\u000d\u0020-\ud7ff\ue000-\ufffd]|([\ud800-\ud<br>
+bff][\udc00-\udfff])))*)?\?&gt;)|([\u0020\u0009\u000d\u000a]+))*)?(?'root'(&lt;(?'root<br>
+Name'(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037<br>
+F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-<br>
+\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u<br>
+00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u30<br>
+01-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u0<br>
+0B7\u0300-\u036F\u203F-\u2040])*))(([\u0020\u0009\u000d\u000a]+)(?'attribute'(?'<br>
+name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF<br>
+\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|<br>
+([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u0<br>
+2FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7F<br>
+F\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u030<br>
+0-\u036F\u203F-\u2040])*)(?'eq'([\u0020\u0009\u000d\u000a]+)?=([\u0020\u0009\u00<br>
+0d\u000a]+)?)(?'attValue'"([^&lt;&amp;"]|(?'reference'(?'entityRef'&amp;(?'name'([:A-Z_a-z\<br>
+u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2<br>
+070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff]<br>
+[\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D<br>
+\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\u<br>
+FDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\<br>
+u2040])*);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);()))*"|'([^&lt;&amp;']|(?'reference'(?'entityRe<br>
+f'&amp;(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-<br>
+\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\u<br>
+FFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00<br>
+F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001<br>
+-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B<br>
+7\u0300-\u036F\u203F-\u2040])*);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);()))*')))*([\u0020<br>
+\u0009\u000d\u000a]+)?&gt;(?&gt;&lt;(?'openclose'(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u<br>
+00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2F<br>
+EF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:<br>
+A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\<br>
+u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800<br>
+-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*))(([\u0020\u<br>
+0009\u000d\u000a]+)(?'attribute'(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00<br>
+F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001<br>
+-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\<br>
+u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2<br>
+070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff]<br>
+[\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*)(?'eq'([\u0020\u0009<br>
+\u000d\u000a]+)?=([\u0020\u0009\u000d\u000a]+)?)(?'attValue'"([^&lt;&amp;"]|(?'referenc<br>
+e'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-<br>
+\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\u<br>
+FDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00<br>
+D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00<br>
+-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff])<br>
+)|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);()))*<br>
+"|'([^&lt;&amp;']|(?'reference'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00<br>
+F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF<br>
+\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-<br>
+Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u2<br>
+00D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\<br>
+udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);())|&amp;\#([0-9]<br>
++|x[0-9a-fA-F]+);()))*')))*([\u0020\u0009\u000d\u000a]+)?/&gt;|&lt;(?'open'(?'name'([:<br>
+A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\<br>
+u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800<br>
+-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u037<br>
+0-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-<br>
+\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F<br>
+\u203F-\u2040])*))(([\u0020\u0009\u000d\u000a]+)(?'attribute'(?'name'([:A-Z_a-z\<br>
+u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2<br>
+070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff]<br>
+[\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D<br>
+\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\u<br>
+FDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\<br>
+u2040])*)(?'eq'([\u0020\u0009\u000d\u000a]+)?=([\u0020\u0009\u000d\u000a]+)?)(?'<br>
+attValue'"([^&lt;&amp;"]|(?'reference'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00C0-\u00D6\u00<br>
+D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00<br>
+-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff])<br>
+)(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u2<br>
+00C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\<br>
+ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);())|&amp;\<br>
+#([0-9]+|x[0-9a-fA-F]+);()))*"|'([^&lt;&amp;']|(?'reference'(?'entityRef'&amp;(?'name'([:A-<br>
+Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u2<br>
+00D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\<br>
+udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-<br>
+\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\u<br>
+FDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u<br>
+203F-\u2040])*);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);()))*')))*([\u0020\u0009\u000d\u00<br>
+0a]+)?&gt;|&lt;/(?=\k'open'([\u0020\u0009\u000d\u000a]+)?&gt;)(?'close-open'(?'name'([:A-<br>
+Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u2<br>
+00D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\<br>
+udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-<br>
+\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\u<br>
+FDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u<br>
+203F-\u2040])*))([\u0020\u0009\u000d\u000a]+)?&gt;|(?'reference'(?'entityRef'&amp;(?'na<br>
+me'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u<br>
+200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([<br>
+\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02F<br>
+F\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\<br>
+uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-<br>
+\u036F\u203F-\u2040])*);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);())|(?'PI'&lt;\?(?'pitarget'(<br>
+?![xX][mM][lL])(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\<br>
+u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uF<br>
+DCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D<br>
+8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-<br>
+\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))<br>
+|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*))(([\u0020\u0009\u000d\u000a]+)((?!\?<br>
+&gt;)([\u0009\u000a\u000d\u0020-\ud7ff\ue000-\ufffd]|([\ud800-\udbff][\udc00-\udfff<br>
+])))*)?\?&gt;)|(?'comment'&lt;!--((?!--)([\u0009\u000a\u000d\u0020-\ud7ff\ue000-\ufffd<br>
+]|([\ud800-\udbff][\udc00-\udfff])))*--&gt;)|(?'CDSect'&lt;!\[CDATA\[((?!\]\]&gt;)([\u000<br>
+9\u000a\u000d\u0020-\ud7ff\ue000-\ufffd]|([\ud800-\udbff][\udc00-\udfff])))*\]\]<br>
+&gt;)|(((?!\]\]&gt;)[^&lt;&amp;])*))*(?(open)(?!))&lt;/\k'rootName'([\u0020\u0009\u000d\u000a]+)<br>
+?&gt;)|(&lt;(?'rootName'(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u037<br>
+0-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-<br>
+\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u<br>
+00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C<br>
+00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff<br>
+]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*))(([\u0020\u0009\u000d\u000a]+)(?'<br>
+attribute'(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D<br>
+\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\u<br>
+FDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u0<br>
+0F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FE<br>
+F\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0<br>
+-9\u00B7\u0300-\u036F\u203F-\u2040])*)(?'eq'([\u0020\u0009\u000d\u000a]+)?=([\u0<br>
+020\u0009\u000d\u000a]+)?)(?'attValue'"([^&lt;&amp;"]|(?'reference'(?'entityRef'&amp;(?'nam<br>
+e'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u2<br>
+00C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\<br>
+ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF<br>
+\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\u<br>
+F900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\<br>
+u036F\u203F-\u2040])*);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);()))*"|'([^&lt;&amp;']|(?'referenc<br>
+e'(?'entityRef'&amp;(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-<br>
+\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\u<br>
+FDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-z\u00C0-\u00D6\u00<br>
+D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00<br>
+-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff])<br>
+)|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*);())|&amp;\#([0-9]+|x[0-9a-fA-F]+);()))*<br>
+')))*([\u0020\u0009\u000d\u000a]+)?/&gt;))(?'misc'(?'comment'&lt;!--((?!--)([\u0009\u0<br>
+00a\u000d\u0020-\ud7ff\ue000-\ufffd]|([\ud800-\udbff][\udc00-\udfff])))*--&gt;)|(?'<br>
+PI'&lt;\?(?'pitarget'(?![xX][mM][lL])(?'name'([:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u<br>
+00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u30<br>
+01-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbff][\udc00-\udfff]))(([:A-Z_a-<br>
+z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\<br>
+u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]|([\ud800-\udbf<br>
+f][\udc00-\udfff]))|[-.0-9\u00B7\u0300-\u036F\u203F-\u2040])*))(([\u0020\u0009\u<br>
+000d\u000a]+)((?!\?&gt;)([\u0009\u000a\u000d\u0020-\ud7ff\ue000-\ufffd]|([\ud800-\u<br>
+dbff][\udc00-\udfff])))*)?\?&gt;)|([\u0020\u0009\u000d\u000a]+))*$</code></pre>
