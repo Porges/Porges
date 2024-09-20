@@ -10,6 +10,7 @@ Some entry points:
 
 - [[interests|My (Current) Interests]]
 - [[publications|My (Few) Publications]]
+- [[History of Programming Language Topics]] collects a few old articles
 
 ## Elsewhere
 
