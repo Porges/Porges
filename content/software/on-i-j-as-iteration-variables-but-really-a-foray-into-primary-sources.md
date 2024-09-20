@@ -13,7 +13,9 @@ The question has generated many answers, from scholarly to spurious — but the 
 
 Let’s start with the claims that FORTRAN was the original source for their use in programming languages—while perhaps not the ultimate origin, it may have been the reason that they became widespread in the programming community.
 
-The original manual for Fortran^[It isn’t written FORTRAN here. I’m not sure of the nuances of its capitalization.] for the IBM 704 is [readily available online](http://www.fh-jena.de/~kleine/history/languages/FortranAutomaticCodingSystemForTheIBM704.pdf). The first thing I notice is the glorious cover:
+The original manual for Fortran[^1] for the IBM 704 is [readily available online](http://www.fh-jena.de/~kleine/history/languages/FortranAutomaticCodingSystemForTheIBM704.pdf). The first thing I notice is the glorious cover:
+
+[^1]: It isn’t written FORTRAN here. I’m not sure of the nuances of its capitalization.
 
 ![[FortranCover.png]]
 
@@ -21,7 +23,9 @@ And sure enough, we can find the definition for the integral variables:
 
 ![[FortranVars.png]]
 
-Unfortunately, the path stops here. I can’t find any references by Backus (or anyone else) as to why they chose IJKLMN as the integer variables. However, due to the fact that integer variables in Fortran “are somewhat restricted in their use and serve primarily as subscripts or exponents”,^[1. J.W. Backus, R.J. Beeber, S. Best, R. Goldberg, L.M. Haibt, H.L. Herrick, R.A. Nelson, D. Sayre, P.B. Sheridan, H.J. Stern, I. Ziller, R.A. Hughes, and R. Nutt, [The FORTRAN automatic coding system](http://archive.computerhistory.org/resources/text/Fortran/102663113.05.01.acc.pdf). Pages 188-198. In _Proceedings Western Joint Computer Conference_, Los Angeles, California, February 1957.] I am forced to the conclusion that they were used in imitation of those in mathematics. I don’t think we’ll ever know exactly who or when they were introduced to Fortran itself.
+Unfortunately, the path stops here. I can’t find any references by Backus (or anyone else) as to why they chose IJKLMN as the integer variables. However, due to the fact that integer variables in Fortran “are somewhat restricted in their use and serve primarily as subscripts or exponents”,[^2] I am forced to the conclusion that they were used in imitation of those in mathematics. I don’t think we’ll ever know exactly who or when they were introduced to Fortran itself.
+
+[^2]: J.W. Backus, R.J. Beeber, S. Best, R. Goldberg, L.M. Haibt, H.L. Herrick, R.A. Nelson, D. Sayre, P.B. Sheridan, H.J. Stern, I. Ziller, R.A. Hughes, and R. Nutt, [The FORTRAN automatic coding system](http://archive.computerhistory.org/resources/text/Fortran/102663113.05.01.acc.pdf). Pages 188-198. In _Proceedings Western Joint Computer Conference_, Los Angeles, California, February 1957.
 
 What we can do, however, is have a look at when they arose in mathematics. The usual place that i, j, etc. arise is in ‘sigma notation’, using the summation operator Σ. For example, if we write:
 
@@ -31,7 +35,9 @@ $$
 
 We mean $i (= 1) + i (= 2) + i (= 3)$, until $i = 100$, and we can calculate the answer as $1 + 2 + 3 + 4 + \cdots = 5050$. So where did this notation itself come from?
 
-The standard work on the history of mathematical notations is _A History of Mathematical Notations_ by Florian Cajori.^[Unfortunately, only [the first volume](http://www.archive.org/details/historyofmathema031756mbp) appears to be readily available online. You can see [some of the second volume](http://books.google.co.nz/books?id=bT5suOONXlgC) on Google Books.] He states that Σ was first used by Euler, in his [_Institutiones calculi differentialis_](http://books.google.co.nz/books?id=sYE_AAAAcAAJ) (1755). We can see the part in question here:
+The standard work on the history of mathematical notations is _A History of Mathematical Notations_ by Florian Cajori.[^3] He states that Σ was first used by Euler, in his [_Institutiones calculi differentialis_](http://books.google.co.nz/books?id=sYE_AAAAcAAJ) (1755). We can see the part in question here:
+
+[^3]: Unfortunately, only [the first volume](http://www.archive.org/details/historyofmathema031756mbp) appears to be readily available online. You can see [some of the second volume](http://books.google.co.nz/books?id=bT5suOONXlgC) on Google Books.
 
 ![[Euler1755.png]]
 
@@ -52,9 +58,14 @@ Again, we can see Σ is only used in opposition to Δ. Cajori next states that �
 > 2 \pi \phi (x, t) = \int d \alpha f \alpha \sum_{-\frac{1}{0}}^{+\frac{1}{0}} \cos i (\alpha - x) e^{-ikt}
 > $$
 > 
-> It must then have all its integral values from $-\frac{1}{0}$ up to $+\frac{1}{0}$; that is what one indicates by writing the limits $-\frac{1}{0}$ and $+\frac{1}{0}$ next to the sign $Σ$, that one of the values of $i$ is $0$. This is the most concise expression of the solution.^[Note that Fourier has no qualms about writing $-\frac{1}{0}$ and $+\frac{1}{0}$ to represent infinities!]
+> It must then have all its integral values from $-\frac{1}{0}$ up to $+\frac{1}{0}$; that is what one indicates by writing the limits $-\frac{1}{0}$ and $+\frac{1}{0}$ next to the sign $Σ$, that one of the values of $i$ is $0$. This is the most concise expression of the solution.[^4]
 
-Since Fourier explains Σ several times in the book, and not just once, we can assume that the notation is either new or unfamiliar to most readers.^[Knuth also states that the notation arrived with Fourier, so I guess I’m not in bad company.] In any case, it doesn’t really matter who invented it, because while we have found our Σ, Fourier doesn’t explain why he uses $i$. In fact, since he uses it to index sequences in other places it appears it must be an already-existing usage.^[While $i$ is often used as (one of) the indices for a matrix, true matrices weren’t developed until after Fourier’s book was published, we must look elsewhere.]
+[^4]: Note that Fourier has no qualms about writing $-\frac{1}{0}$ and $+\frac{1}{0}$ to represent infinities!
+
+Since Fourier explains Σ several times in the book, and not just once, we can assume that the notation is either new or unfamiliar to most readers.[^5] In any case, it doesn’t really matter who invented it, because while we have found our Σ, Fourier doesn’t explain why he uses $i$. In fact, since he uses it to index sequences in other places it appears it must be an already-existing usage.[^6]
+
+[^5]: Knuth also states that the notation arrived with Fourier, so I guess I’m not in bad company.
+[^6]: While $i$ is often used as (one of) the indices for a matrix, true matrices weren’t developed until after Fourier’s book was published, we must look elsewhere.
 
 A quick glance at the text by Euler above shows that he uses indexing very rarely (despite the subject of the text being a prime candidate!), and when he does, he uses $m$.
 
