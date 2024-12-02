@@ -1,0 +1,1 @@
+On [[The Gauntlet]], [[Lu Quad]] describes [Stars and Wishes](https://www.gauntlet-rpg.com/blog/stars-and-wishes) (2018-08-22), a way to garner feedback on each session.
