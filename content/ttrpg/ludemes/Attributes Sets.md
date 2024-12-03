@@ -28,7 +28,7 @@ Determined by rolling:
 
 ### [[Into the Odd (2014)]]
 
-Also: [[Maze Rates 1e (2015)]], [[Maze Rates 2e (2016)]], [[Cairn (2020)]], [[Mausritter (2020)]].
+Also: [[Maze Rats 0.1 (2015)]], [[Maze Rats 4.3 (2016)]], [[Cairn 1e (2020)]], [[Mausritter (2019)]].
 
 Determined by rolling 3d6:
 
@@ -125,7 +125,7 @@ Called “Traits” (all start at 2 and can increase 2 pts):
 
 ### [[D&D]] & derived games
 
-Also: [[Swords & Wizardry (2008)]], [[The Black Hack v1.2 (2016)]], [[GLOG (2016)]], [[Knave (2018)]], [[Five Torches Deep (2019)]], [[Whitehack 3e (2021)]].
+Also: [[Swords & Wizardry (2008)]], [[The Black Hack v1.2 (2016)]], [[GLOG -1.0 (2016)]], [[Knave 1e (2018)]], [[Five Torches Deep (2019)]], [[Whitehack 3e (2021)]].
 
 > [!Note]
 > In OD&D the referee rolls!
@@ -145,9 +145,9 @@ Unearthed Arcana (1985) has a per-class method.
 
 [[The Black Hack v1.2 (2016)]] uses 3d6 but if 14+ is rolled, next attribute is 7. Can then swap two attributes.
 
-[[GLOG (2016)]] rolls 4d4, modifier is $\frac{score}3-3$.
+[[GLOG -1.0 (2016)]] rolls 4d4, modifier is $\frac{score}3-3$.
 
-[[Knave (2018)]] rolls 3d6 pick-lowest to determine _modifier_.
+[[Knave 1e (2018)]] rolls 3d6 pick-lowest to determine _modifier_.
 
 ### [[Traveller (1977)]]
 
@@ -180,7 +180,7 @@ Roll 4d6 drop lowest:
 5. Wit
 6. Will
 
-### [[Star Wars: The Roleplaying Game]]
+### [[Star Wars - The Roleplaying Game]]
 
 1. Dexterity – balance, coördination
 2. Knowledge – common sense, academic
@@ -224,7 +224,7 @@ In [[RuneQuest 2e (1979)]] these are rearranged to group physical attributes, an
 6. Dexterity (DEX)
 7. Charisma (CHA)
 
-In [[Runequest 3e (1984)]] Charisma is renamed Appearance, and this is retained in [[Basic Roleplaying 3e (2002)]] and BRP 4e (see next).
+In [[RuneQuest 3e (1984)]] Charisma is renamed Appearance, and this is retained in [[Basic Roleplaying 3e (2002)]] and BRP 4e (see next).
 
 In [[RuneQuest 4e/Mongoose (2006)]] Charisma returns, and remains in [[RuneQuest 5e/Mongoose (2010)]] and [[RuneQuest 6e (2012)]].
 

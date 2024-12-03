@@ -1,0 +1,4 @@
+---
+aliases:
+  - "Vampire: The Masquerade"
+---

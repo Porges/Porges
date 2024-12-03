@@ -1,0 +1,1 @@
+A blog by [[Yochai Gal]]: [New School Revolution](https://newschoolrevolution.com/).

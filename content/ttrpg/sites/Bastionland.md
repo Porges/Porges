@@ -1,4 +1,4 @@
-A blog by [[Chris McDowall]]: https://www.bastionland.com/
+A blog by [[Chris McDowall]]: [BASTIONLAND](https://www.bastionland.com/)
 
 ## Interesting Articles
 

@@ -1,7 +1,8 @@
 ---
 published: 2020
-designer: [[Chris McDowall]]
-system: [[Into the Odd]]
+designer:
+  - "[[Chris McDowall]]"
+family: "[[Odd-likes]]"
 ---
 
 Expanded from [[Into the Odd (2014)]].

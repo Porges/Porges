@@ -6,16 +6,15 @@ This is an index of articles about TTRPG stuff that I’ve found personally inte
 
 ## Pre-Session (Preparation)
 
-![[How I Run Into the Odd]]
+[[How I Run Into the Odd]]
 
-![[The 7-3-1 Technique]]
+[[The 7-3-1 Technique]]
 
 [**How to Run 200+ Sessions with 25 Systems in One Year** - THE GAUNTLET (archive.org)](https://web.archive.org/web/20220629003216/https://www.gauntlet-rpg.com/blog/how-to-run-200-sessions-with-25-systems-in-one-year)
 
 ## End-of-Session
 
-![[Stars and Wishes]]
-
+[[Stars and Wishes]]
 ## Choices & Impact
 
 [Goblin Punch: **Impact**](https://goblinpunch.blogspot.com/2017/10/impact.html) (2017-10-05)

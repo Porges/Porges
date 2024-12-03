@@ -1,0 +1,2 @@
+- [[GURPS 1e (1986)]]
+- [[GURPS 3e revised (1994)]]
