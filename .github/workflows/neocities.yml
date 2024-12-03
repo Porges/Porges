@@ -33,8 +33,10 @@ jobs:
       - name: Build site
         run: npx quartz build
       - name: Deploy to Neocities
-        uses: bcomnes/deploy-to-neocities@v2
+        uses: bcomnes/deploy-to-neocities@v3
         with:
           api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
           cleanup: true
           dist_dir: public
+          neocities_supporter: true
+          preview_before_deploy: true
