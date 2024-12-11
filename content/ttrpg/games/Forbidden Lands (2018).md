@@ -1,5 +1,5 @@
----
-published: 2018
-publisher: "[[Free League]]"
-system: "[[Year Zero Engine]]"
----
+**Published**:: 2018
+**Publisher**:: [[Free League]]
+**System**:: [[Year Zero Engine]]
+
+

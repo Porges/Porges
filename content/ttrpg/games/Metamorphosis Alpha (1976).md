@@ -1,6 +1,5 @@
----
-published: 1976
-designer: "[[James M. Ward]]"
----
+**Published**:: 1976
+**Designer**:: [[James M. Ward]]
+
 Inspired:
-- [[Gamma World (1978)]]
+- [[Gamma World 1e (1978)]]

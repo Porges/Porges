@@ -1,6 +1,5 @@
----
-designer:
-  - "[[Christian Mehrstam]]"
-family: "[[Whitehack]]"
-published: 2023
----
+**Designer**:: [[Christian Mehrstam]]
+**Family**:: [[Whitehack]]
+**Published**:: 2023
+
+

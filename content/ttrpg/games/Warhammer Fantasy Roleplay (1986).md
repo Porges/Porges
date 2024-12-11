@@ -1,7 +1,10 @@
 ---
-published: 1986
-publisher: "[[Games Workshop]]"
-family: "[[WFRP]]"
-aliases:
-  - WFRP1
+aliases: WFRP1
 ---
+
+**Published**:: 1986
+**Publisher**:: [[Games Workshop]]
+**Family**:: [[WFRP]]
+**Aliases**:: WFRP1
+
+

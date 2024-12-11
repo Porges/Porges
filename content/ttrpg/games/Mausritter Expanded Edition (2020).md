@@ -1,9 +1,8 @@
----
-publisher: "[[Games Omnivorous]]"
-family: "[[Odd-likes]]"
-designer:
-  - "[[Isaac Williams]]"
----
+**Published**:: 2020
+**Publisher**:: [[Games Omnivorous]]
+**Designer**:: [[Isaac Williams]]
+**Family**:: [[Odd-likes]]
+
 A revision and expansion of [[Mausritter (2019)]].
 
 Inspirations (explicitly listed in the rulebook):

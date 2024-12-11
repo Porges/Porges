@@ -1,12 +1,10 @@
 ---
-aliases:
-  - OD&D
-family: "[[D&D]]"
-designer:
-  - "[[Gary Gygax]]"
-  - "[[Dave Arneson]]"
-published: 1974
+aliases: OD&D
 ---
+**Published**:: 1974
+**Publisher**:: [[TSR]]
+**Designer**:: [[Gary Gygax]], [[Dave Arneson]]
+**Family**:: [[D&D]]
 
 **AKA**: OD&D, 0e D&D, White Box D&D 
 

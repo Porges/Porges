@@ -1,5 +1,5 @@
----
-published: 2018
-family: "[[RuneQuest]]"
-publisher: "[[Chaosium]]"
----
+**Published**:: 2018
+**Family**:: [[RuneQuest]]
+**Publisher**:: [[Chaosium]]
+
+

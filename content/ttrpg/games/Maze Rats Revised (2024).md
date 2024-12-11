@@ -1,9 +1,7 @@
----
-designer:
-  - "[[Ben Milton]]"
-publisher: "[[Swordfish Islands]]"
-published: 2024
----
+**Designer**:: [[Ben Milton]]
+**Publisher**:: [[Swordfish Islands]]
+**Published**:: 2024
+
 Inspiration (explicitly listed in the book):
 
 - [[Chris McDowall]] ([[Into the Odd (2014)|Into the Odd]])

@@ -5,7 +5,7 @@ Used by games in the [[Advanced Fighting Fantasy (1989)]] family, like [[Troika!
 
 ## d100
 
-Used by [[Basic Roleplaying 2e (1980)]], [[Call of Cthulhu (1981)]], [[Warhammer Fantasy Roleplay (1986)]].
+Used by [[Basic Roleplaying 2e (1980)]], [[Call of Cthulhu 1e (1981)]], [[Warhammer Fantasy Roleplay (1986)]].
 ## 3d6
 
 Used by [[GURPS]] and derived systems..

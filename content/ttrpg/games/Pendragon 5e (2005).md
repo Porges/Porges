@@ -1,7 +1,6 @@
----
-published: 2005
-designer:
-  - "[[Greg Stafford]]"
-family: "[[Pendragon]]"
-publisher: "[[Arthaus]]"
----
+**Published**:: 2005
+**Publisher**:: [[Arthaus]]
+**Designer**:: [[Greg Stafford]]
+**Family**:: [[Pendragon]]
+
+

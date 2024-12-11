@@ -1,4 +1,4 @@
----
-published: 2006
-system: "[[Fate System]]"
----
+**Published**:: 2006
+**System**:: [[Fate System]]
+
+

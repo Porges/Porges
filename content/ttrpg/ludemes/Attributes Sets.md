@@ -160,7 +160,7 @@ Roll 2d6:
 5. Education: highest level of schooling
 6. Social Standing: class/level of society
 
-### [[Gamma World (1978)]] 
+### [[Gamma World 1e (1978)]] 
 
 Roll 4d6 drop lowest:
 
@@ -180,7 +180,7 @@ Roll 4d6 drop lowest:
 5. Wit
 6. Will
 
-### [[Star Wars - The Roleplaying Game]]
+### [[Star Wars - The Roleplaying Game|Star Wars: The Roleplaying Game]]
 
 1. Dexterity – balance, coördination
 2. Knowledge – common sense, academic
@@ -230,7 +230,7 @@ In [[RuneQuest 4e/Mongoose (2006)]] Charisma returns, and remains in [[RuneQuest
 
 **Skills**: Idea (INT×5 in 2e or ×3 in 3e), Luck (POW×5), Dodge (DEX×5), Persuade (???).
 
-### [[Neoclassical Geek Revival (2019)]]
+### [[Neoclassical Geek Revival 1e (2019)]]
 
 Roll 3d6 and additionally spend 10 points, or spend 80 points:
 

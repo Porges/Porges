@@ -1,8 +1,6 @@
----
-designer:
-  - "[[Steve Perrin]]"
-  - "[[Ray Turney]]"
-family: "[[RuneQuest]]"
-published: 1979
-publisher: "[[Chaosium]]"
----
+**Designer**:: [[Steve Perrin]], [[Ray Turney]]
+**Family**:: [[RuneQuest]]
+**Published**:: 1979
+**Publisher**:: [[Chaosium]]
+
+

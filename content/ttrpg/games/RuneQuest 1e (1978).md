@@ -1,7 +1,6 @@
----
-designer:
-  - "[[Steve Perrin]]"
-family: "[[RuneQuest]]"
-publisher: "[[Chaosium]]"
-published: 1978
----
+**Designer**:: [[Steve Perrin]]
+**Family**:: [[RuneQuest]]
+**Publisher**:: [[Chaosium]]
+**Published**:: 1978
+
+

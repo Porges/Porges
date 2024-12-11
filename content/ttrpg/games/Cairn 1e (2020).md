@@ -1,9 +1,7 @@
----
-designer:
-  - "[[Yochai Gal]]"
-published: 2020
-family: "[[Odd-likes]]"
----
+**Published**:: 2020
+**Designer**:: [[Yochai Gal]]
+**Family**:: [[Odd-likes]]
+
 Inspirations (explicitly listed in the book):
 - [[Into the Odd (2014)|Into the Odd]] 
 - [[Knave 1e (2018)]]

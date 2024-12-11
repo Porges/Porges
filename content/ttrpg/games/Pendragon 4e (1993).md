@@ -1,7 +1,6 @@
----
-designer:
-  - "[[Greg Stafford]]"
-family: "[[Pendragon]]"
-publisher: "[[Chaosium]]"
-published: 1993
----
+**Published**:: 1993
+**Publisher**:: [[Chaosium]]
+**Designer**:: [[Greg Stafford]]
+**Family**:: [[Pendragon]]
+
+

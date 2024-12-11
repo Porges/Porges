@@ -1,4 +1,5 @@
----
-published: 2020
-system: "[[Basic Roleplaying]]"
----
+**Published**:: 2020
+**Publisher**:: [[Chaosium]]
+**System**:: [[Basic Roleplaying]]
+
+

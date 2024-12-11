@@ -1,5 +1,5 @@
----
-published: 1998
-family: "[[Shadowrun]]"
-publisher: "[[FASA]]"
----
+**Published**:: 1998
+**Family**:: [[Shadowrun]]
+**Publisher**:: [[FASA]]
+
+

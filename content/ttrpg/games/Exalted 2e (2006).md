@@ -1,6 +1,6 @@
----
-family: "[[Exalted]]"
-system: "[[Storyteller System]]"
-published: 2006
-publisher: "[[White Wolf]]"
----
+**Published**:: 2006
+**Publisher**:: [[White Wolf]]
+**Family**:: [[Exalted]]
+**System**:: [[Storyteller System]]
+
+

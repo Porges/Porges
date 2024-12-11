@@ -1,7 +1,6 @@
----
-designer:
-  - "[[David Hargrave]]"
-family: "[[Arduin]]"
-publisher: "[[Grimoire Games]]"
-published: 1981
----
+**Designer**:: [[David Hargrave]]
+**Family**:: [[Arduin]]
+**Publisher**:: [[Grimoire Games]]
+**Published**:: 1981
+
+

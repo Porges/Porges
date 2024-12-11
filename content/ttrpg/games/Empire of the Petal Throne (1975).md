@@ -1,4 +1,4 @@
----
-published: 1975
-designer: "[[M. A. R. Barker]]"
----
+**Published**:: 1975
+**Designer**:: [[M. A. R. Barker]]
+
+

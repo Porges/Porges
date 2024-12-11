@@ -1,5 +1,5 @@
----
-published: 2013
-family: "[[Shadowrun]]"
-publisher: "[[Catalyst Game Labs]]"
----
+**Published**:: 2013
+**Family**:: [[Shadowrun]]
+**Publisher**:: [[Catalyst Game Labs]]
+
+

@@ -1,7 +1,5 @@
----
-published: 2009
-designer:
-  - "[[J. C. Connors]]"
-  - "[[Christopher Lawrence]]"
-family: "[[RuneQuest]]"
----
+**Published**:: 2009
+**Designer**:: [[J. C. Connors]], [[Christopher Lawrence]]
+**Family**:: [[RuneQuest]]
+
+

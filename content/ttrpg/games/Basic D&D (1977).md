@@ -1,9 +1,7 @@
----
-published: 1977
-designer:
-  - "[[J. Eric Holmes]]"
-family: "[[D&D]]"
----
+**Published**:: 1977
+**Publisher**:: [[TSR]]
+**Designer**:: [[J. Eric Holmes]]
+**Family**:: [[D&D]]
 
 ## Basic D&D (Holmes, 1977)
 

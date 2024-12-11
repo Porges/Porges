@@ -1,4 +1,3 @@
----
-published: 2002
-system: "[[Basic Roleplaying]]"
----
+**Published**:: 2002
+**Publisher**:: [[Chaosium]]
+**System**:: [[Basic Roleplaying]]

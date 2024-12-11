@@ -1,8 +1,7 @@
----
-designer:
-  - "[[Skerples]]"
-published: 2018
----
+**Designer**:: [[Skerples]]
+**Published**:: 2018
+
+
 Inspired by [[GLOG -1.0 (2016)]].
 
 # See Also

@@ -1,127 +1,134 @@
 ---
-title: Index to Games
+title: Index to RPG Games
 ---
-This article collects games discussed on this site. The term "family" is very broad and includes actual publisher families or "strong inspirations", or even systems — sometimes it is hard to draw a line here.
+This article collects an index to games discussed on this site. The term "family" is very broad and includes actual publisher families or "strong inspirations", or even systems — sometimes it is hard to draw a line here.
 
 > [!Note]
 >  This list is not comprehensive and is highly biased to my own preferences/research interests!
 
-<!-- QueryToSerialize: TABLE published, designer, family, system FROM "ttrpg/games" SORT published ASC -->
-<!-- SerializedQuery: TABLE published, designer, family, system FROM "ttrpg/games" SORT published ASC -->
-
-| File                                                                                                | published | designer                                                                                                                                                                        | family                                                                                   | system                                                      |
-| --------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| [[Mausritter Expanded Edition (2020)]]           | \-        | <ul><li>[[Isaac Williams]]</li></ul>                                                                                                           | [[Odd-likes]]                                               | \-                                                          |
-| [[GLOG -1.0 (2016)]]                                               | \-        | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Errant (2022)]]                                                     | \-        | <ul><li>[[Ava Islam]]</li></ul>                                                                                                                                     | \-                                                                                       | \-                                                          |
-| [[Dungeons & Dragons (1974)]]                             | 1974      | <ul><li>[[Gary Gygax]]</li><li>[[Dave Arneson]]</li></ul>                                                                                           | [[D&D]]                                                           | \-                                                          |
-| [[Empire of the Petal Throne (1975)]]             | 1975      | [[M. A. R. Barker\|M. A. R. Barker]]                                                                                                                                            | \-                                                                                       | \-                                                          |
-| [[Metamorphosis Alpha (1976)]]                           | 1976      | [[James M. Ward\|James M. Ward]]                                                                                                                                                | \-                                                                                       | \-                                                          |
-| [[AD&D 1e (1977)]]                                                   | 1977      | <ul><li>[[Gary Gygax]]</li></ul>                                                                                                                                   | [[D&D]]                                                           | \-                                                          |
-| [[Basic D&D (1977)]]                                               | 1977      | <ul><li>[[J. Eric Holmes\|J. Eric Holmes]]</li></ul>                                                                                                                           | [[D&D]]                                                           | \-                                                          |
-| [[The Arduin Grimoire (1977)]]                           | 1977      | <ul><li>[[David Hargrave]]</li></ul>                                                                                                                           | [[Arduin]]                                                                       | \-                                                          |
-| [[Traveller (1977)]]                                               | 1977      | <ul><li>[[Marc Miller]]</li><li>[[Frank Chadwick]]</li><li>[[John Harshman]]</li><li>[[Loren Wiseman]]</li></ul> | \-                                                                                       | \-                                                          |
-| [[Bifrost (1977)]]                                                   | 1977      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[The Complete Warlock (1978)]]                         | 1978      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Gamma World (1978)]]                                           | 1978      | <ul><li>[[Gary “Jake” Jaquet]]</li></ul>                                                                                                   | \-                                                                                       | \-                                                          |
-| [[RuneQuest 1e (1978)]]                                         | 1978      | <ul><li>[[Steve Perrin]]</li></ul>                                                                                                                               | [[RuneQuest]]                                               | \-                                                          |
-| [[Bushido (1979)]]                                                   | 1979      | <ul><li>[[Robert N. Charrette]]</li><li>[[Paul Hume]]</li></ul>                                                               | [[Bushido]]                                                   | \-                                                          |
-| [[RuneQuest 2e (1979)]]                                         | 1979      | <ul><li>[[Steve Perrin]]</li><li>[[Ray Turney]]</li></ul>                                                                                           | [[RuneQuest]]                                               | \-                                                          |
-| [[Basic Roleplaying 2e (1980)]]                         | 1980      | \-                                                                                                                                                                              | \-                                                                                       | [[Basic Roleplaying]]   |
-| [[B-X D&D (1981)]]                                                   | 1981      | <ul><li>[[Tom Moldvay]]</li><li>[[Dave 'Zeb' Cook\|Dave Cook]]</li></ul>                                                         | [[D&D]]                                                           | \-                                                          |
-| [[Bushido 2e (1981)]]                                             | 1981      | \-                                                                                                                                                                              | [[Bushido]]                                                   | \-                                                          |
-| [[Call of Cthulhu (1981)]]                                   | 1981      | <ul><li>[[Sandy Petersen]]</li></ul>                                                                                                                           | [[Call of Cthulhu]]                                   | [[Basic Roleplaying]]   |
-| [[The Arduin Adventure (1981)]]                         | 1981      | <ul><li>[[David Hargrave]]</li></ul>                                                                                                                           | [[Arduin]]                                                                       | \-                                                          |
-| [[BECMI D&D (Mentzer, 1983)]]                             | 1983      | <ul><li>[[Frank Mentzer]]</li></ul>                                                                                                                             | [[D&D]]                                                           | \-                                                          |
-| [[Chill (1984)]]                                                       | 1984      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Rolemaster 2e (1984)]]                                       | 1984      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[RuneQuest 3e (1984)]]                                         | 1984      | <ul><li>[[Steve Perrin]]</li><li>[[Greg Stafford]]</li><li>[[Steve Henderson]]</li><li>[[Lynn Willis]]</li></ul> | [[RuneQuest]]                                               | \-                                                          |
-| [[Pendragon 1e (1985)]]                                         | 1985      | <ul><li>[[Greg Stafford]]</li></ul>                                                                                                                             | [[Pendragon]]                                               | \-                                                          |
-| [[Ghostbusters (1986)]]                                         | 1986      | <ul><li>[[Sandy Petersen]]</li><li>[[Lynn Willis]]</li><li>[[Greg Stafford]]</li></ul>                                           | [[Ghostbusters]]                                         | [[D6 System]]                   |
-| [[GURPS 1e (1986)]]                                                 | 1986      | \-                                                                                                                                                                              | [[GURPS]]                                                       | \-                                                          |
-| [[Warhammer Fantasy Roleplay (1986)]]             | 1986      | \-                                                                                                                                                                              | [[WFRP]]                                                                           | \-                                                          |
-| [[MegaTraveller (1987)]]                                       | 1987      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Star Wars - The Roleplaying Game (1987)]] | 1987      | \-                                                                                                                                                                              | [[Star Wars - The Roleplaying Game]] | [[D6 System]]                   |
-| [[AD&D 2e (1989)]]                                                   | 1989      | <ul><li>[[Dave 'Zeb' Cook\|Dave Cook]]</li></ul>                                                                                                               | (Advanced) [[D&D]]                                                                       | \-                                                          |
-| [[Advanced Fighting Fantasy (1989)]]               | 1989      | <ul><li>[[Marc Gascoigne]]</li><li>[[Pete Tamlyn]]</li></ul>                                                                                     | \-                                                                                       | \-                                                          |
-| [[Ghostbusters International (1989)]]             | 1989      | <ul><li>[[Aaron Allston]]</li><li>[[Douglas Kaufman]]</li></ul>                                                                               | [[Ghostbusters]]                                         | \-                                                          |
-| [[Shadowrun 1e (1989)]]                                         | 1989      | <ul><li>[[Robert N. Charrette\|Bob Charrette]]</li><li>[[Paul Hume]]</li><li>[[Tom Dowd]]</li></ul>                     | [[Shadowrun]]                                                                 | \-                                                          |
-| [[Pendragon 3e (1990)]]                                         | 1990      | <ul><li>[[Greg Stafford]]</li></ul>                                                                                                                             | [[Pendragon]]                                               | \-                                                          |
-| [[D&D Rules Cyclopedia (1991)]]                         | 1991      | <ul><li>[[Aaron Allston]]</li></ul>                                                                                                                             | (Basic) [[D&D]]                                                                          | \-                                                          |
-| [[Vampire - The Masquerade 1e (1991)]]           | 1991      | <ul><li>[[Mark Rein-Hagen]]</li><li>[[Tom Dowd]]</li></ul>                                                                         | [[Vampire - The Masquerade\|Vampire: The Masquerade]]                  | [[Storyteller System]] |
-| [[Shadowrun 2e (1992)]]                                         | 1992      | <ul><li>[[Tom Dowd]]</li></ul>                                                                                                                       | [[Shadowrun]]                                                                 | \-                                                          |
-| [[Vampire - The Masquerade 2e (1992)]]           | 1992      | <ul><li>[[Mark Rein-Hagen]]</li></ul>                                                                                                                         | [[Vampire - The Masquerade\|Vampire: The Masquerade]]                  | \-                                                          |
-| [[Star Wars 2e (1992)]]                                         | 1992      | \-                                                                                                                                                                              | [[Star Wars - The Roleplaying Game]] | \-                                                          |
-| [[Pendragon 4e (1993)]]                                         | 1993      | <ul><li>[[Greg Stafford]]</li></ul>                                                                                                                             | [[Pendragon]]                                               | \-                                                          |
-| [[Castle Falkenstein (1994)]]                             | 1994      | <ul><li>[[Michael Alyn Pondsmith]]</li></ul>                                                                                                           | \-                                                                                       | \-                                                          |
-| [[GURPS 3e revised (1994)]]                                 | 1994      | \-                                                                                                                                                                              | [[GURPS]]                                                       | \-                                                          |
-| [[Fudge (1995)]]                                                       | 1995      | <ul><li>[[Steffan O’Sullivan]]</li></ul>                                                                                                                   | \-                                                                                       | \-                                                          |
-| [[Theatrix (1995)]]                                                 | 1995      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Star Wars 2e rev (1996)]]                                 | 1996      | \-                                                                                                                                                                              | [[Star Wars - The Roleplaying Game]] | \-                                                          |
-| [[Shadowrun 3e (1998)]]                                         | 1998      | \-                                                                                                                                                                              | [[Shadowrun]]                                                                 | \-                                                          |
-| [[Vampire - The Masquerade rev (1998)]]         | 1998      | \-                                                                                                                                                                              | [[Vampire - The Masquerade\|Vampire: The Masquerade]]                  | \-                                                          |
-| [[RuneQuest - Slayers (1998)]]                           | 1998      | <ul><li>[[Christopher Lawrence]]</li><li>[[J. C. Connors\|J. C. Connors]]</li></ul>                                                                     | [[RuneQuest]]                                               | \-                                                          |
-| [[Adventure! (2001)]]                                             | 2001      | \-                                                                                                                                                                              | [[Trinity Universe]]                                                   | [[Storyteller System]] |
-| [[Exalted 1e (2001)]]                                             | 2001      | \-                                                                                                                                                                              | [[Exalted]]                                                   | [[Storyteller System]] |
-| [[Basic Roleplaying 3e (2002)]]                         | 2002      | \-                                                                                                                                                                              | \-                                                                                       | [[Basic Roleplaying]]   |
-| [[FATE 1e (2003)]]                                                   | 2003      | <ul><li>[[Rob Donoghue]]</li><li>[[Fred Hicks]]</li></ul>                                                                                           | \-                                                                                       | \-                                                          |
-| [[Dogs in the Vineyard (2004)]]                         | 2004      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Warhammer Fantasy Roleplay 2e (2005)]]       | 2005      | \-                                                                                                                                                                              | [[WFRP]]                                                                           | \-                                                          |
-| [[Shadowrun 4e (2005)]]                                         | 2005      | \-                                                                                                                                                                              | [[Shadowrun]]                                                                 | \-                                                          |
-| [[Pendragon 5e (2005)]]                                         | 2005      | <ul><li>[[Greg Stafford]]</li></ul>                                                                                                                             | [[Pendragon]]                                               | \-                                                          |
-| [[Spirit of the Century (2006)]]                       | 2006      | \-                                                                                                                                                                              | \-                                                                                       | [[Fate System]]                                |
-| [[RuneQuest 4e (2006)]]                                         | 2006      | \-                                                                                                                                                                              | [[RuneQuest]]                                               | \-                                                          |
-| [[Exalted 2e (2006)]]                                             | 2006      | \-                                                                                                                                                                              | [[Exalted]]                                                   | [[Storyteller System]] |
-| [[Swords & Wizardry (2008)]]                               | 2008      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Diaspora (2009)]]                                                 | 2009      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[RuneSlayers rev (2009)]]                                   | 2009      | <ul><li>[[J. C. Connors\|J. C. Connors]]</li><li>[[Christopher Lawrence]]</li></ul>                                                                     | [[RuneQuest]]                                               | \-                                                          |
-| [[RuneQuest 5e (2010)]]                                         | 2010      | \-                                                                                                                                                                              | [[RuneQuest]]                                               | \-                                                          |
-| [[The One Ring (2011)]]                                         | 2011      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Dungeon Crawl Classics (2012)]]                     | 2012      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[RuneQuest 6e (2012)]]                                         | 2012      | \-                                                                                                                                                                              | [[RuneQuest]]                                               | \-                                                          |
-| [[Dungeon World (2012)]]                                       | 2012      | <ul><li>Adam Koebel</li><li>[[Sage LaTorra]]</li></ul>                                                                                                           | \-                                                                                       | [[Powered by the Apocalypse\|PbtA]]       |
-| [[World of Dungeons (2012)]]                               | 2012      | <ul><li>[[John Harper]]</li></ul>                                                                                                                 | \-                                                                                       | [[Powered by the Apocalypse\|PbtA]]       |
-| [[Lasers & Feelings (2013)]]                               | 2013      | <ul><li>[[John Harper]]</li></ul>                                                                                                                 | \-                                                                                       | \-                                                          |
-| [[13 Age 1e (2013)]]                                               | 2013      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Fate Core System (2013)]]                                 | 2013      | \-                                                                                                                                                                              | \-                                                                                       | [[Fate System]]                                |
-| [[Shadowrun 5e (2013)]]                                         | 2013      | \-                                                                                                                                                                              | [[Shadowrun]]                                                                 | \-                                                          |
-| [[Whitehack 1e (2013)]]                                         | 2013      | \-                                                                                                                                                                              | [[Whitehack]]                                               | \-                                                          |
-| [[Into the Odd (2014)]]                                         | 2014      | <ul><li>[[Chris McDowall]]</li></ul>                                                                                                           | [[Odd-likes]]                                               | \-                                                          |
-| [[Call of Cthulhu 7e (2014)]]                             | 2014      | <ul><li>[[Sandy Petersen]]</li></ul>                                                                                                                           | [[Call of Cthulhu]]                                   | \-                                                          |
-| [[Maze Rats 0.1 (2015)]]                                       | 2015      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Shadow of the Demon Lord (2015)]]                 | 2015      | <ul><li>[[Robert J. Schwalb\|Robert J. Schwalb]]</li></ul>                                                                                                                     | \-                                                                                       | \-                                                          |
-| [[Whitehack 2e (2015)]]                                         | 2015      | \-                                                                                                                                                                              | [[Whitehack]]                                               | \-                                                          |
-| [[The Black Hack v1.2 (2016)]]                           | 2016      | <ul><li>[[David Black]]</li></ul>                                                                                                                 | \-                                                                                       | \-                                                          |
-| [[Maze Rats 4.3 (2016)]]                                       | 2016      | <ul><li>[[Ben Milton]]</li></ul>                                                                                                                                   | \-                                                                                       | \-                                                          |
-| [[Coriolis 1e (2016)]]                                           | 2016      | \-                                                                                                                                                                              | \-                                                                                       | [[Year Zero Engine]]     |
-| [[Blades in the Dark (2016)]]                             | 2016      | <ul><li>[[John Harper]]</li></ul>                                                                                                                 | \-                                                                                       | \-                                                          |
-| [[Low Fantasy Gaming (2016)]]                             | 2016      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Exalted 3e (2016)]]                                             | 2016      | \-                                                                                                                                                                              | [[Exalted]]                                                   | [[Storyteller System]] |
-| [[Symbaroum (2016)]]                                               | 2016      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[7th Sea 2e (2016)]]                                             | 2016      | <ul><li>[[John Wick]]</li></ul>                                                                                                                                     | \-                                                                                       | \-                                                          |
-| [[Macchiato Monsters (2018)]]                             | 2018      | <ul><li>[[Eric Nieudan]]</li></ul>                                                                                                               | \-                                                                                       | \-                                                          |
-| [[Knave Rats (2018)]]                                             | 2018      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Knave 1e (2018)]]                                                 | 2018      | <ul><li>[[Ben Milton]]</li></ul>                                                                                                                                   | \-                                                                                       | \-                                                          |
-| [[Forbidden Lands (2018)]]                                   | 2018      | \-                                                                                                                                                                              | \-                                                                                       | [[Year Zero Engine]]     |
-| [[Spiked Goblin Punch (2018)]]                           | 2018      | <ul><li>[[Skerples]]</li></ul>                                                                                                                       | \-                                                                                       | \-                                                          |
-| [[Mothership 0e (2018)]]                                       | 2018      | <ul><li>[[Sean McCoy]]</li></ul>                                                                                                                                   | \-                                                                                       | \-                                                          |
-| [[Best Left Buried (2018)]]                                 | 2018      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Ironsworn (2018)]]                                               | 2018      | <ul><li>[[Shawn Tomkin]]</li></ul>                                                                                                                               | [[Powered by the Apocalypse\|PbtA]]                                    | \-                                                          |
-| [[RuneQuest 7e (2018)]]                                         | 2018      | \-                                                                                                                                                                              | [[RuneQuest]]                                               | \-                                                          |
-| [[Mörk Borg (2019)]]                                               | 2019      | [[Pele Nilsson]]                                                                                                                                                  | \-                                                                                       | \-                                                          |
-| [[Old School Essentials (2019)]]                       | 2019      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Mausritter (2019)]]                                             | 2019      | <ul><li>[[Isaac Williams]]</li></ul>                                                                                                           | [[Odd-likes]]                                               | \-                                                          |
-| [[Maze Rats 5.3 (2019)]]                                       | 2019      | <ul><li>[[Dreaming Dragonslayer]]</li></ul>                                                                                                             | \-                                                                                       | \-                                                          |
-| [[Five Torches Deep]]                                             | 2019      | <ul><li>[[Ben Dutter]]</li><li>[[Jessica Dutter]]</li></ul>                                                                                       | [[5SR]]                                                                             | \-                                                          |
-| [[Troika! (2019)]]                                                   | 2019      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Neoclassical Geek Revival (2019)]]               | 2019      | <ul><li>[[Zzarchov Kowolski]]</li></ul>                                                                                                                     | \-                                                                                       | \-                                                          |
-| [[Electric Bastionland (2020)]]                         | 2020      | <ul><li>[[Chris McDowall]]</li></ul>                                                                                                           | [[Odd-likes]]                                               | \-                                                          |
-| [[Cairn 1e (2020)]]                                                 | 2020      | <ul><li>[[Yochai Gal]]</li></ul>                                                                                                                   | [[Odd-likes]]                                               | \-                                                          |
-| [[Maze Knaves (2020)]]                                           | 2020      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[The Lavender Hack (2020)]]                               | 2020      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Basic Roleplaying 4e - Gold (2020)]]           | 2020      | \-                                                                                                                                                                              | \-                                                                                       | [[Basic Roleplaying]]   |
-| [[Whitehack 3e (2021)]]                                         | 2021      | <ul><li>[[Christian Mehrstam]]</li></ul>                                                                                                   | \-                                                                                       | \-                                                          |
-| [[The One Ring (2021)]]                                         | 2021      | \-                                                                                                                                                                              | \-                                                                                       | \-                                                          |
-| [[Whitehack 4e (2023)]]                                         | 2023      | <ul><li>[[Christian Mehrstam]]</li></ul>                                                                                                   | [[Whitehack]]                                               | \-                                                          |
-| [[Maze Rats Revised (2024)]]                               | 2024      | <ul><li>[[Ben Milton]]</li></ul>                                                                                                                                   | \-                                                                                       | \-                                                          |
+<!-- QueryToSerialize: LIST FROM "ttrpg/games" SORT published DESC -->
+<!-- SerializedQuery: LIST FROM "ttrpg/games" SORT published DESC -->
+- [[Maze Rats Revised (2024)]]
+- [[Whitehack 4e (2023)]]
+- [[Deathmatch Island (2023)]]
+- [[Mothership 1e (2023)]]
+- [[Errant (2022)]]
+- [[Into the Odd remastered (2022)]]
+- [[Cy_Borg (2022)]]
+- [[Whitehack 3e (2021)]]
+- [[The One Ring (2021)]]
+- [[Neoclassical Geek Revival 2e (2021)]]
+- [[Electric Bastionland (2020)]]
+- [[Mausritter Expanded Edition (2020)]]
+- [[Cairn 1e (2020)]]
+- [[Maze Knaves (2020)]]
+- [[The Lavender Hack (2020)]]
+- [[Basic Roleplaying 4e - Gold (2020)]]
+- [[AGON 2e (2020)]]
+- [[Fate Condensed (2020)]]
+- [[Mörk Borg (2019)]]
+- [[Old School Essentials (2019)]]
+- [[Mausritter (2019)]]
+- [[Maze Rats 5.3 (2019)]]
+- [[Troika! (2019)]]
+- [[Five Torches Deep (2019)]]
+- [[Neoclassical Geek Revival 1e (2019)]]
+- [[Macchiato Monsters (2018)]]
+- [[Knave Rats (2018)]]
+- [[Knave 1e (2018)]]
+- [[Forbidden Lands (2018)]]
+- [[Spiked Goblin Punch (2018)]]
+- [[Mothership 0e (2018)]]
+- [[Best Left Buried (2018)]]
+- [[Ironsworn (2018)]]
+- [[RuneQuest 7e (2018)]]
+- [[The Black Hack v1.2 (2016)]]
+- [[Maze Rats 4.3 (2016)]]
+- [[GLOG -1.0 (2016)]]
+- [[Low Fantasy Gaming (2016)]]
+- [[Exalted 3e (2016)]]
+- [[Symbaroum (2016)]]
+- [[7th Sea 2e (2016)]]
+- [[Blades in the Dark (2017)]]
+- [[Coriolis 1e (2016)]]
+- [[Maze Rats 0.1 (2015)]]
+- [[Shadow of the Demon Lord (2015)]]
+- [[Whitehack 2e (2015)]]
+- [[Into the Odd (2014)]]
+- [[Call of Cthulhu 7e (2014)]]
+- [[Lasers & Feelings (2013)]]
+- [[13 Age 1e (2013)]]
+- [[Fate Core System (2013)]]
+- [[Shadowrun 5e (2013)]]
+- [[Whitehack 1e (2013)]]
+- [[Fate Accelerated (2013)]]
+- [[Dungeon Crawl Classics (2012)]]
+- [[RuneQuest 6e (2012)]]
+- [[Dungeon World (2012)]]
+- [[World of Dungeons (2012)]]
+- [[The One Ring (2011)]]
+- [[RuneQuest 5e (2010)]]
+- [[Diaspora (2009)]]
+- [[RuneSlayers rev (2009)]]
+- [[Swords & Wizardry (2008)]]
+- [[Spirit of the Century (2006)]]
+- [[RuneQuest 4e (2006)]]
+- [[Exalted 2e (2006)]]
+- [[Warhammer Fantasy Roleplay 2e (2005)]]
+- [[Shadowrun 4e (2005)]]
+- [[Pendragon 5e (2005)]]
+- [[Dogs in the Vineyard (2004)]]
+- [[FATE 2e (2003)]]
+- [[Basic Roleplaying 3e (2002)]]
+- [[Adventure! (2001)]]
+- [[Exalted 1e (2001)]]
+- [[7th Sea 1e (1999)]]
+- [[Shadowrun 3e (1998)]]
+- [[Vampire - The Masquerade rev (1998)]]
+- [[RuneQuest - Slayers (1998)]]
+- [[Star Wars 2e rev (1996)]]
+- [[Fudge (1995)]]
+- [[Theatrix (1995)]]
+- [[Castle Falkenstein (1994)]]
+- [[GURPS 3e revised (1994)]]
+- [[Pendragon 4e (1993)]]
+- [[Shadowrun 2e (1992)]]
+- [[Vampire - The Masquerade 2e (1992)]]
+- [[Star Wars 2e (1992)]]
+- [[D&D Rules Cyclopedia (1991)]]
+- [[Vampire - The Masquerade 1e (1991)]]
+- [[Pendragon 3e (1990)]]
+- [[AD&D 2e (1989)]]
+- [[Advanced Fighting Fantasy (1989)]]
+- [[Ghostbusters International (1989)]]
+- [[Shadowrun 1e (1989)]]
+- [[MegaTraveller (1987)]]
+- [[Star Wars - The Roleplaying Game (1987)]]
+- [[Ghostbusters (1986)]]
+- [[GURPS 1e (1986)]]
+- [[Warhammer Fantasy Roleplay (1986)]]
+- [[Pendragon 1e (1985)]]
+- [[Chill (1984)]]
+- [[Rolemaster 2e (1984)]]
+- [[RuneQuest 3e (1984)]]
+- [[BECMI D&D (Mentzer, 1983)]]
+- [[Call of Cthulhu 2e (1983)]]
+- [[B-X D&D (1981)]]
+- [[Bushido 2e (1981)]]
+- [[The Arduin Adventure (1981)]]
+- [[Call of Cthulhu 1e (1981)]]
+- [[Basic Roleplaying 2e (1980)]]
+- [[RuneQuest 2e (1979)]]
+- [[Bushido 1e (1979)]]
+- [[The Complete Warlock (1978)]]
+- [[RuneQuest 1e (1978)]]
+- [[Gamma World 1e (1978)]]
+- [[AD&D 1e (1977)]]
+- [[Basic D&D (1977)]]
+- [[The Arduin Grimoire (1977)]]
+- [[Traveller (1977)]]
+- [[Bifrost (1977)]]
+- [[Metamorphosis Alpha (1976)]]
+- [[Empire of the Petal Throne (1975)]]
+- [[Dungeons & Dragons (1974)]]
 <!-- SerializedQuery END -->

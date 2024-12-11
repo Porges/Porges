@@ -1,0 +1,3 @@
+- [[Call of Cthulhu 1e (1981)]] 
+- [[Call of Cthulhu 2e (1983)]] 
+- [[Call of Cthulhu 7e (2014)]] 

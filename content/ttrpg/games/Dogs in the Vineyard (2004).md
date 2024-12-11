@@ -1,4 +1,5 @@
----
-published: 2004
-author: "[[D. Vincent Barker]]"
----
+**Published**:: 2004
+**Publisher**:: [[Lumpley Games]]
+**Author**:: [[D. Vincent Baker]]
+
+

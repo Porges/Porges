@@ -1,5 +1,4 @@
----
-published: 2016
-designer:
-  - "[[David Black]]"
----
+**Published**:: 2016
+**Designer**:: [[David Black]]
+
+

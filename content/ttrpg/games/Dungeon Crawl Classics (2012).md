@@ -1,4 +1,4 @@
----
-published: 2012
-publisher: "[[Goodman Games]]"
----
+**Published**:: 2012
+**Publisher**:: [[Goodman Games]]
+
+

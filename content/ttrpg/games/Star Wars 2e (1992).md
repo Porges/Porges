@@ -1,4 +1,4 @@
----
-published: 1992
-family: "[[Star Wars - The Roleplaying Game]]"
----
+**Published**:: 1992
+**Family**:: [[Star Wars - The Roleplaying Game|Star Wars: The Roleplaying Game]]
+
+

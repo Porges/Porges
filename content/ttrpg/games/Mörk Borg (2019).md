@@ -1,7 +1,5 @@
----
-published: 2019
-designer: "[[Pele Nilsson]]"
-artist: "[[Johan Nohr]]"
----
-
-Designed by [[Pele Nilsson]]. Art by [[Johan Nohr]].
+**Published**:: 2019
+**Publisher**:: [[Ockult Örtmästare Games]], [[Stockholm Kartel]], [[Free League]]
+**Designer**:: [[Pele Nilsson]]
+**Artist**:: [[Johan Nohr]]
+**Family**:: [[Borgs]]

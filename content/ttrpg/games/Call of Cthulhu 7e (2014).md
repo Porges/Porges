@@ -1,6 +1,8 @@
----
-published: 2014
-designer:
-  - "[[Sandy Petersen]]"
-family: "[[Call of Cthulhu]]"
----
+**Published**:: 2014
+**Publisher**:: [[Chaosium]]
+**Designer**:: [[Sandy Petersen]]
+**Family**:: [[Call of Cthulhu]]
+**System**:: [[Basic Roleplaying]]
+
+
+

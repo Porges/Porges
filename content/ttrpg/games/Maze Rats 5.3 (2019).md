@@ -1,9 +1,5 @@
----
-published: 2019
-designer:
-  - "[[Dreaming Dragonslayer]]"
----
-
+**Published**:: 2019
+**Designer**:: [[Dreaming Dragonslayer]]
 
 A modification of [[Maze Rats 4.3 (2016)]] by in order to play [[Hot Springs Island]].
 

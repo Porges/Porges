@@ -1,6 +1,9 @@
 ---
-published: 2005
-family: "[[WFRP]]"
-aliases:
-  - WFRP2
+aliases: WFRP2
 ---
+
+**Published**:: 2005
+**Family**:: [[WFRP]]
+**Aliases**:: WFRP2
+
+

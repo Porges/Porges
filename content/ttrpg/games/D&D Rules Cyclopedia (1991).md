@@ -1,11 +1,11 @@
 ---
-aliases:
-  - RC D&D
-published: 1991
-designer:
-  - "[[Aaron Allston]]"
-family: (Basic) [[D&D]]
+aliases: RC D&D
 ---
+**Published**:: 1991
+**Publisher**:: [[TSR]]
+**Aliases**:: RC D&D
+**Designer**:: [[Aaron Allston]]
+**Family**:: (Basic) [[D&D]]
 
 **AKA**:: RC D&D
 

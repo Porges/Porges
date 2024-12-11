@@ -1,5 +1,5 @@
----
-published: 2006
-family: "[[RuneQuest]]"
-publisher: "[[Mongoose]]"
----
+**Published**:: 2006
+**Family**:: [[RuneQuest]]
+**Publisher**:: [[Mongoose]]
+
+

@@ -7,7 +7,7 @@ site: "[[Grognardia]]"
 ## Quotes
 
 > I doubt I've ever met anyone who's played Advanced Dungeons & Dragons.
-
 ^9f07e4
+
 ## Mentions
 - [[Gary “Jake” Jaquet]]

@@ -1,7 +1,6 @@
----
-published: 1992
-family: "[[Shadowrun]]"
-designer:
-  - "[[Tom Dowd]]"
-publisher: "[[FASA]]"
----
+**Published**:: 1992
+**Family**:: [[Shadowrun]]
+**Designer**:: [[Tom Dowd]]
+**Publisher**:: [[FASA]]
+
+

@@ -1,10 +1,6 @@
 ---
-aliases:
-  - Into the Odd
-family: "[[Odd-likes]]"
-designer:
-  - "[[Chris McDowall]]"
-published: 2014
+aliases: Into the Odd
 ---
-
-A game by [[Chris McDowall]]. First released in 2014. Remastered edition published by [[Free League]] in 2022.
+**Published**:: 2014
+**Family**:: [[Odd-likes]]
+**Designer**:: [[Chris McDowall]]

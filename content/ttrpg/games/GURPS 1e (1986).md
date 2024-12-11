@@ -1,4 +1,5 @@
----
-published: 1986
-family: "[[GURPS]]"
----
+**Published**:: 1986
+**Publisher**:: [[Steve Jackson Games]]
+**Family**:: [[GURPS]]
+
+

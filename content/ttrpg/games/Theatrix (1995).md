@@ -1,4 +1,4 @@
----
-published: 1995
-publisher: "[[Backstage Press]]"
----
+**Published**:: 1995
+**Publisher**:: [[Backstage Press]]
+
+

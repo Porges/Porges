@@ -1,5 +1,5 @@
----
-published: 2015
-family: "[[Whitehack]]"
-author: "[[Christian Mehrstam]]"
----
+**Published**:: 2015
+**Family**:: [[Whitehack]]
+**Author**:: [[Christian Mehrstam]]
+
+

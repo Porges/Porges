@@ -1,5 +1,3 @@
----
-published: 1980
-publisher: "[[Chaosium]]"
-system: "[[Basic Roleplaying]]"
----
+**Published**:: 1980
+**Publisher**:: [[Chaosium]]
+**System**:: [[Basic Roleplaying]]

@@ -1,5 +1,5 @@
----
-published: 2012
-publisher: "[[The Design Mechanism]]"
-family: "[[RuneQuest]]"
----
+**Published**:: 2012
+**Publisher**:: [[The Design Mechanism]]
+**Family**:: [[RuneQuest]]
+
+

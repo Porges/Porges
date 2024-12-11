@@ -1,6 +1,5 @@
----
-published: 1994
-designer:
-  - "[[Michael Alyn Pondsmith]]"
-publisher: "[[R. Talsorian Games]]"
----
+**Published**:: 1994
+**Publisher**:: [[R. Talsorian Games]]
+**Designer**:: [[Michael Alyn Pondsmith]]
+
+

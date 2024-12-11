@@ -1,9 +1,8 @@
----
-published: 1983
-family: "[[D&D]]"
-designer:
-  - "[[Frank Mentzer]]"
----
+**Published**:: 1983
+**Publisher**:: [[TSR]]
+**Family**:: [[D&D]]
+**Designer**:: [[Frank Mentzer]]
+
 
 **AKA**: Red Box D&D
 
