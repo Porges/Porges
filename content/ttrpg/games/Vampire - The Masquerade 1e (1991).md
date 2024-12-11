@@ -1,5 +1,6 @@
 ---
-aliases: Vampire: The Masquerade 1e (1991)
+aliases:
+- 'Vampire: The Masquerade 1e (1991)'
 ---
 
 **Published**:: 1991
