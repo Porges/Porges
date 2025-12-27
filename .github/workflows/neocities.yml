@@ -36,7 +36,7 @@ jobs:
       - name: Remove TTRPG content
         run: rm -rf hugo/content/ttrpg
       - name: Build site with Hugo
-        run: cd hugo && hugo build
+        run: cd hugo && hugo build && tree hugo/public
       - name: Deploy to Neocities
         uses: bcomnes/deploy-to-neocities@v3
         with:
