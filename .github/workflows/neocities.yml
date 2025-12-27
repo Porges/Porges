@@ -36,12 +36,12 @@ jobs:
       - name: Remove TTRPG content
         run: rm -rf hugo/content/ttrpg
       - name: Build site with Hugo
-        run: cd hugo && hugo build && tree hugo/public
+        run: cd hugo && hugo build && tree public
       - name: Deploy to Neocities
         uses: bcomnes/deploy-to-neocities@v3
         with:
           api_key: ${{ secrets.NEOCITIES_API_TOKEN }}
           cleanup: false
-          dist_dir: hugo/public
+          dist_dir: public
           neocities_supporter: true
           preview_before_deploy: true
