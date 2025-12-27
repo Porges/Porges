@@ -41,7 +41,7 @@ jobs:
         uses: bcomnes/deploy-to-neocities@v3
         with:
           api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
-          cleanup: true
+          cleanup: false
           dist_dir: hugo/public
           neocities_supporter: true
           preview_before_deploy: true
