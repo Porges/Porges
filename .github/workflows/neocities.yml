@@ -32,7 +32,7 @@ jobs:
         with:
           hugo-version: "0.153.2"
       - name: Export Obsidian Vault
-        run: obsidian-export content hugo/content --frontmatter always
+        run: mkdir hugo/content && obsidian-export content hugo/content --frontmatter always
       - name: Remove TTRPG content
         run: rm -rf hugo/content/ttrpg
       - name: Build site with Hugo
