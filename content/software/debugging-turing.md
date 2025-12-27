@@ -2,6 +2,7 @@
 date: 2009-08-10
 title: "Debugging Turing: an excursion with Scheme"
 ---
+
 So, I thought it would be a fun idea for my first ever Lisp/Scheme program to implement Alan Turing’s original _a_-machines from his paper, _[On Computable Numbers, with an Application to the Entscheidungsproblem](https://web.archive.org/web/20090827145936/http://plms.oxfordjournals.org/cgi/reprint/s2-42/1/230)_ (paper available to public). Fun? Oh, I hadn’t any idea…
 
 ### Preamble; choice of implementation

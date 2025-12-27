@@ -6,7 +6,7 @@ date: 2012-01-10
 This question was recently asked on StackOverflow:
 
 > I know this might seem like an absolutely silly question to ask, yet I am too curious not to ask…
-> 
+>
 > **[Why did “i” and “j” become THE variables to use as counters in most control structures?](http://stackoverflow.com/questions/4137785/why-are-variables-i-and-j-used-for-counters)**
 
 The question has generated many answers, from scholarly to spurious — but the thing that has struck me is that no one has attempted to cite their sources or do any research. Why is this, when we live in a time when primary sources are more widely available than ever?
@@ -57,7 +57,7 @@ Again, we can see Σ is only used in opposition to Δ. Cajori next states that �
 > $$
 > 2 \pi \phi (x, t) = \int d \alpha f \alpha \sum_{-\frac{1}{0}}^{+\frac{1}{0}} \cos i (\alpha - x) e^{-ikt}
 > $$
-> 
+>
 > It must then have all its integral values from $-\frac{1}{0}$ up to $+\frac{1}{0}$; that is what one indicates by writing the limits $-\frac{1}{0}$ and $+\frac{1}{0}$ next to the sign $Σ$, that one of the values of $i$ is $0$. This is the most concise expression of the solution.[^4]
 
 [^4]: Note that Fourier has no qualms about writing $-\frac{1}{0}$ and $+\frac{1}{0}$ to represent infinities!

@@ -11,6 +11,7 @@ Some entry points:
 - [[interests|My (Current) Interests]]
 - [[publications|My (Few) Publications]]
 - [[History of Programming Language Topics]] collects a few old articles
+- See the [tags](/tags/) list for more.
 
 ## Elsewhere
 

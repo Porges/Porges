@@ -6,12 +6,43 @@ title = 'george pollard'
 author = 'George Pollard'
 
 enableRobotsTXT = true
+# sectionPagesMenu = 'main'
 
 disableKinds = ["taxonomy"]
 ignoreErrors = ["error-disable-taxonomy"]
+
 [permalinks]
   blog = "/:slug/"
   tags = "/tags/:slug"
+
+[related]
+  includeNewer = true
+  threshold = 80
+  toLower = false
+  [[related.indices]]
+    applyFilter = false
+    cardinalityThreshold = 0
+    name = 'keywords'
+    pattern = ''
+    toLower = false
+    type = 'basic'
+    weight = 100
+  [[related.indices]]
+    applyFilter = false
+    cardinalityThreshold = 0
+    name = 'date'
+    pattern = ''
+    toLower = false
+    type = 'basic'
+    weight = 10
+  [[related.indices]]
+    applyFilter = false
+    cardinalityThreshold = 0
+    name = 'tags'
+    pattern = ''
+    toLower = false
+    type = 'basic'
+    weight = 80
 
 [params]
   # The "description" of your website. This is used in the meta data of your generated html.
@@ -39,20 +70,30 @@ ignoreErrors = ["error-disable-taxonomy"]
   # By default, if you want to read more than one blog post you have to always go
   # back to the /blog page.
   # By enabling this feature each blog post will have at the end a navigator
-  # enablePostNavigator = true
+  enablePostNavigator = true
 
   # By default, this theme displays dates with a format like "02 Jan, 2006", but
   # you can customize it by setting the `dateFormat` param in your site's config
   # file. See [Hugo's Format function docs](https://gohugo.io/functions/format/)
   # for details. An example TOML config that uses [ISO
   # 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
-  # dateFormat = "2006-01-02"
+  dateFormat = "2006-01-02"
+
+  math = true
 
 # Configure markup highlighter to match "Bearblog" aesthetics, see
 # https://gohugo.io/configuration/markup/#highlight
 [markup]
-  [markup.highlight]
-    style = 'friendly'
-    lineNos = true
-    lineNumbersInTable = false
-    codeFences = true
+  #[markup.highlight]
+  #  style = 'friendly'
+  #  lineNos = true
+  #  lineNumbersInTable = false
+  #  codeFences = true
+
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['$$', '$$']]
+          inline = [['$', '$']]

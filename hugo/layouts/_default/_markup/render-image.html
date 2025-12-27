@@ -1,0 +1,24 @@
+{{- $url := urls.Parse .Destination -}}
+{{- $scheme := $url.Scheme -}}
+
+<img src="
+  {{- if eq $scheme "" -}}
+    {{- if strings.HasSuffix $url.Path ".md" -}}
+      {{- relref .Page .Destination | safeURL -}}
+    {{- else -}}
+      {{- /* this feels very hacky, but I can't be bothered figuring it out right now */ -}}
+      {{- if strings.HasPrefix .Destination ".." -}}
+        /{{- replace .Page.File.Dir "\\" "/" | safeURL -}}{{- replace .Destination "\\" "/" | safeURL -}}
+      {{- else -}}
+        /{{- .Destination | safeURL -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- .Destination | safeURL -}}
+  {{- end -}}"
+  {{- with .Title }} title="{{ . | safeHTML }}"{{- end -}}
+  {{- with .Text }} alt="{{ . | safeHTML }}"
+  {{- end -}}
+/>
+
+{{- /* whitespace stripped here to avoid trailing newline in rendered result caused by file EOL */ -}}
