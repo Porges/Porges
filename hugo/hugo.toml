@@ -1,4 +1,4 @@
-baseURL = 'https://pogg.es/'
+baseURL = 'https://porg.es/'
 
 theme = 'hugo-bearblog'
 languageCode = 'en-GB-oxendict'
